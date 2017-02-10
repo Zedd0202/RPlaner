@@ -19,7 +19,7 @@ class ToDo: Object {
      dynamic var planTitle: String? = ""
      dynamic var deadLineNumber: String? = ""
      dynamic var TimeOfCompletion :String?
-     dynamic  var memo: String?
+     dynamic var memo: String?
      dynamic var isComplete = false
     
 

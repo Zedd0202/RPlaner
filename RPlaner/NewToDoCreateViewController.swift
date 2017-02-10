@@ -103,6 +103,9 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
         self.navigationItem.rightBarButtonItem = saveButton
+        
+        let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
+        self.navigationItem.leftBarButtonItem = cancelButton
         // Do any additional setup after loading the view.
     }
     
@@ -116,6 +119,10 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             ToDoList().update(todo: todo, name: todoTitleTextField.text!, deadline: todoDaysTextField.text!, completionOption : todoCompleteOptionTextField.text!, memoText: todoMemo.text)
         }
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
+    }
+    func onClickCancelButton(sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+        
     }
     
     private func isValidate() -> Bool {
@@ -137,10 +144,6 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
    
 
    
-    @IBAction func tapCancelButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-
-    }
     
    
     

@@ -47,6 +47,22 @@
             </objects>
             <point key="canvasLocation" x="-543" y="-665"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3YM-zx-fb6">
+            <objects>
+                <navigationController id="RME-Lt-gmE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tEj-Z6-cpy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9ay-Eg-El0" kind="relationship" relationship="rootViewController" id="NM1-78-5Iy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UZf-sm-zny" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="969" y="-407"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9Em-QT-xX6">
             <objects>
@@ -104,7 +120,7 @@
                     <navigationItem key="navigationItem" title="Title" id="eaA-gl-lgj">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZBQ-Du-Ein">
                             <connections>
-                                <segue destination="9ay-Eg-El0" kind="show" id="oAp-kK-OpG"/>
+                                <segue destination="RME-Lt-gmE" kind="show" id="xrr-9T-Jsl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -187,13 +203,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="mV1-gj-sqG">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Sgj-kG-U7N">
-                            <connections>
-                                <action selector="tapCancelButton:" destination="9ay-Eg-El0" id="psS-Oi-jVz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="mV1-gj-sqG"/>
                     <connections>
                         <outlet property="todoCompleteOptionTextField" destination="e2C-Bk-bvU" id="3G8-tU-ogO"/>
                         <outlet property="todoDaysTextField" destination="lco-dZ-jFH" id="H2C-yQ-m2J"/>

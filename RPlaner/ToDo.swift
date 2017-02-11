@@ -18,10 +18,11 @@ class ToDo: Object {
     
      dynamic var planTitle: String? = ""
      dynamic var deadLineNumber: String? = ""
-     dynamic var TimeOfCompletion :String?
+     dynamic var TimeOfCompletion : String?
      dynamic var memo: String?
      dynamic var isComplete = false
-     dynamic var createdAt = NSDate()
+    dynamic var isDoing = false
+    // dynamic var createdAt = NSDate()
     
 
 }

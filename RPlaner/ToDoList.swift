@@ -35,7 +35,8 @@ class ToDoList {
         toDo.TimeOfCompletion = completionOption
         toDo.memo = memoText
         toDo.isComplete = false
-        toDo.createdAt = NSDate()
+    
+        //toDo.createdAt = NSDate()
         
         do {
             let realm = try Realm()
@@ -54,10 +55,13 @@ class ToDoList {
                 todo?.planTitle = name
                 todo?.deadLineNumber = deadline
                 todo?.TimeOfCompletion = completionOption
-                todo?.memo = memoText            }
+                todo?.memo = memoText
+               // todo?.isComplete = isCompleted
+            }
         } catch {
             print("update error")
         }
     }
+    
 }
 

@@ -106,21 +106,26 @@ class ToDoListViewController: UITableViewController {
 //        deleteTableIndexPath = nil
 //    }
     
-
+   
     
-//    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
-//        if sender.selectedSegmentIndex == 0{
+    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0{
+            
+            // A-Z
+            
+//            self.todoList = self.todoList.items!.sorted(by: { (left: ToDo, right: ToDo) -> Bool in
+//                return left.planTitle ?? "" < right.planTitle ?? ""
+//            })
 //            
-//            // A-Z
 //            self.todoList = self.todoList.items!.sorted(byProperty: "planTitle", ascending: true)
 //            sorted(byProperty: "planTitle")
-//        }
-//        else{
+        }
+        else{
 //            // date
 //           self.todoList = self.todoList.items!.sorted(byProperty: "createdAt", ascending:false)
-//        }
-//        self.tableView.reloadData()
-//    }
+        }
+        self.tableView.reloadData()
+    }
 
 
 

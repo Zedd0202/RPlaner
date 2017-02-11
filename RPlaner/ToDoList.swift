@@ -35,6 +35,7 @@ class ToDoList {
         toDo.TimeOfCompletion = completionOption
         toDo.memo = memoText
         toDo.isComplete = false
+        toDo.createdAt = NSDate()
         
         do {
             let realm = try Realm()

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 class ToDoListViewController: UITableViewController {
 
     var todoList = ToDoList()
@@ -49,18 +49,96 @@ class ToDoListViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! ToDoListViewCell
         self.todo = cell.todo
     }
+    var deleteTableIndexPath: NSIndexPath? = nil
+
     
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+        }
+        
+
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+            
+            tableView.beginUpdates()
+            self.todoList.delete(index: editActionsForRowAt.row)
+            let indexPaths = NSIndexPath(row: editActionsForRowAt.row, section: editActionsForRowAt.section)
+            
+            tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
+            tableView.endUpdates()
+//            self.deleteTableIndexPath = editActionsForRowAt as NSIndexPath?
+//            self.confirmDelete(planet: "tableToDelete")
+            
+        }
+        
+        return [delete,edit]
+    }
+//    func confirmDelete(planet: String) {
+//        let alert = UIAlertController(title: "계획 삭제", message: "정말 지우시겠어요?", preferredStyle: .actionSheet)
+//        
+//        let DeleteAction = UIAlertAction(title: "삭제", style: .destructive, handler: handleDeleteTable)
+//        let CancelAction = UIAlertAction(title: "취소", style: .cancel, handler: cancelDeleteTable)
+//        
+//        alert.addAction(DeleteAction)
+//        alert.addAction(CancelAction)
+//        
+//        alert.popoverPresentationController?.sourceView = self.view
+//        alert.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.size.width / 2.0, y : self.view.bounds.size.height / 2.0, width : 1.0,height : 1.0)
+//        
+//        self.present(alert, animated: true, completion: nil)
+//    }
+//    
+//    
+//    
+//    func handleDeleteTable(alertAction: UIAlertAction!) -> Void {
+//        if let indexPath =  deleteTableIndexPath
+//        {
+//            tableView.beginUpdates()
+//            tableView.beginUpdates()
+//            todoList.delete(index: indexPath.row)
+//            let indexPaths = NSIndexPath(row: indexPath.row, section: indexPath.section)
+//            
+//            tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
+//            tableView.endUpdates()
+//        }
+//    }
+//    func cancelDeleteTable(alertAction: UIAlertAction!) {
+//        deleteTableIndexPath = nil
+//    }
     
+
+    
+//    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
+//        if sender.selectedSegmentIndex == 0{
+//            
+//            // A-Z
+//            self.todoList = self.todoList.items!.sorted(byProperty: "planTitle", ascending: true)
+//            sorted(byProperty: "planTitle")
+//        }
+//        else{
+//            // date
+//           self.todoList = self.todoList.items!.sorted(byProperty: "createdAt", ascending:false)
+//        }
+//        self.tableView.reloadData()
+//    }
+
+
+
+
+
+
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
             todoList.delete(index: indexPath.row)
             let indexPaths = NSIndexPath(row: indexPath.row, section: indexPath.section)
+
             tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
             tableView.endUpdates()
         }
     }
+    
     
     func onClickAddButton(sender: UIBarButtonItem) {
         self.todo = nil

@@ -21,6 +21,7 @@ class ToDo: Object {
      dynamic var TimeOfCompletion :String?
      dynamic var memo: String?
      dynamic var isComplete = false
+     dynamic var createdAt = NSDate()
     
 
 }

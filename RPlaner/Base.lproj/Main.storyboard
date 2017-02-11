@@ -22,9 +22,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aj5-N0-CP5">
-                                <rect key="frame" x="96" y="512" width="46" height="30"/>
+                                <rect key="frame" x="104" y="512" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="완료"/>
+                                <connections>
+                                    <action selector="tapToDoCompleteButton:" destination="kHt-fO-Mca" eventType="touchUpInside" id="ts0-fr-tV0"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CaB-CZ-F8e">
                                 <rect key="frame" x="134" y="255" width="42" height="21"/>
@@ -34,14 +37,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0y-fb-Vfa">
-                                <rect key="frame" x="134" y="407" width="46" height="30"/>
+                                <rect key="frame" x="113" y="388" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="계획뽑기"/>
+                                <connections>
+                                    <action selector="tapPickRandomToDoButton:" destination="kHt-fO-Mca" eventType="touchUpInside" id="TI9-Pd-KdU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="jQS-pX-Rck"/>
+                    <connections>
+                        <outlet property="completionButton" destination="aj5-N0-CP5" id="PMv-3J-Unm"/>
+                        <outlet property="displayTodoLabel" destination="CaB-CZ-F8e" id="S8M-bf-ZXd"/>
+                        <outlet property="pickRandomToDoButton" destination="E0y-fb-Vfa" id="1Qb-AX-vQn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BoM-3B-8Xt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,9 +100,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="3bQ-W7-3ik">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="ㄱ ~ ㅎ"/>
+                                <segment title="날짜순"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlAction:" destination="lQd-bp-rS5" eventType="valueChanged" id="8Fd-0O-knK"/>
+                            </connections>
+                        </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCell" editingAccessoryType="disclosureIndicator" textLabel="2EN-Ag-dlm" style="IBUITableViewCellStyleDefault" id="V8B-2v-Slz" customClass="ToDoListViewCell" customModule="RPlaner" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="58" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V8B-2v-Slz" id="gX5-0B-eDc">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

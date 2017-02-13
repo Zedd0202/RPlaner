@@ -24,6 +24,6 @@ class ToDo: Object {
     dynamic var isDoing = false
     // dynamic var createdAt = NSDate()
     
-
+    
 }
 

@@ -55,11 +55,11 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ToDoListViewCell
         self.todo = cell.todo
-        self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
+        self.performSegue(withIdentifier: "toDetailToDoViewController", sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "toNewToDoViewController") {
-            let newToDoVC = segue.destination as! NewToDoCreateViewController
+        if (segue.identifier == "toDetailToDoViewController") {
+            let newToDoVC = segue.destination as! ToDoDetailViewController
             newToDoVC.todo = self.todo
         }
     }
@@ -82,6 +82,7 @@ class ToDoListViewController: UITableViewController {
             
             tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
             tableView.endUpdates()
+             print(self.todoList.items?.count)
 //            self.deleteTableIndexPath = editActionsForRowAt as NSIndexPath?
 //            self.confirmDelete(planet: "tableToDelete")
             
@@ -127,23 +128,23 @@ class ToDoListViewController: UITableViewController {
         if sender.selectedSegmentIndex == 0{
             
             // A-Z
-            
+//            var sortedStuff = todoList.items!.sorted(todoList.items, { (left: Int, right: Int) -> Bool in left < right })
 //            self.todoList = self.todoList.items!.sorted(by: { (left: ToDo, right: ToDo) -> Bool in
 //                return left.planTitle ?? "" < right.planTitle ?? ""
 //            })
-//            
-//            self.todoList = self.todoList.items!.sorted(byProperty: "planTitle", ascending: true)
+            
+//         self.todoList = self.todoList.items!.sorted(byProperty: "planTitle", ascending: true)
 //            sorted(byProperty: "planTitle")
-        }
-        else{
-//            // date
-//           self.todoList = self.todoList.items!.sorted(byProperty: "createdAt", ascending:false)
-        }
-        self.tableView.reloadData()
-    }
+//        }
+//        else{
+////            // date
+////           self.todoList = self.todoList.items!.sorted(byProperty: "createdAt", ascending:false)
+//        }
+//        self.tableView.reloadData()
+//    }
 
 
-
+        }}
 
 
 

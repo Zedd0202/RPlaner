@@ -11,9 +11,11 @@ import GameplayKit
 import RealmSwift
 
 class PickToDoViewController: UIViewController {
-    
+    let realm = try! Realm()
+
     var todoList = ToDoList()
     var todo: ToDo?
+   // var count = Count()
     var count : Int = 0
     var randomIndex:Int!
     
@@ -29,6 +31,7 @@ class PickToDoViewController: UIViewController {
         if (todoList.items?.count)! >  0
         {
             while  true{
+                
                 
                 if count == todoList.items?.count{
                     displayTodoLabel.text = "모든 계획이 완료"
@@ -106,6 +109,9 @@ class PickToDoViewController: UIViewController {
                 self.displayTodoLabel.text = displayTodoLabel.text
             }
         }
+       // let memes = realm.objects()
+        
+
         
     }
     

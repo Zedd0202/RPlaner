@@ -90,7 +90,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         if todo != nil {
             self.todoTitleTextField.text = todo?.planTitle
-            self.todoTitleTextField.text = todo?.deadLineNumber
+            self.todoDaysTextField.text = todo?.deadLineNumber
             self.todoCompleteOptionTextField.text = todo?.TimeOfCompletion
             self.todoMemo.text = todo?.memo
             state = .Update
@@ -104,8 +104,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
         self.navigationItem.rightBarButtonItem = saveButton
         
-        let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
-        self.navigationItem.leftBarButtonItem = cancelButton
+//        let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
+//        self.navigationItem.leftBarButtonItem = cancelButton
         // Do any additional setup after loading the view.
     }
     
@@ -120,10 +120,10 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         }
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
     }
-    func onClickCancelButton(sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-        
-    }
+//    func onClickCancelButton(sender: UIBarButtonItem) {
+//        dismiss(animated: true, completion: nil)
+//        
+//    }
     
     private func isValidate() -> Bool {
         if let name = todoTitleTextField.text {

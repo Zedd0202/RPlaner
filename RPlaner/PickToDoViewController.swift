@@ -19,14 +19,14 @@ class PickToDoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        completionButton.isHidden = true
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var displayTodoLabel: UILabel!
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
-        if (todoList.items?.count)! >  1
+        if (todoList.items?.count)! >  0
         {
             while  true{
                 
@@ -72,6 +72,7 @@ class PickToDoViewController: UIViewController {
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
         completionButton.isHidden = true
         pickRandomToDoButton.isHidden = false
+        displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
         
         
         let realm = try! Realm()
@@ -80,7 +81,10 @@ class PickToDoViewController: UIViewController {
         
         todoList.items?[randomIndex].isComplete = true
         count = count + 1//유저디폴트
-        
+        let userDefaults = UserDefaults.standard
+        userDefaults.setValue(count, forKey: "count")
+        userDefaults.synchronize()
+        print(count)
         try? realm.commitWrite()
         
     }
@@ -90,10 +94,18 @@ class PickToDoViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first {
+            
+            if doingTodo.isComplete == false{
             self.displayTodoLabel.text = doingTodo.planTitle
-            print(doingTodo.planTitle)
+            //print(doingTodo.planTitle)
+            pickRandomToDoButton.isHidden = true
+            completionButton.isHidden = false
+            
+            }
+            else{
+                self.displayTodoLabel.text = displayTodoLabel.text
+            }
         }
-        
         
     }
     

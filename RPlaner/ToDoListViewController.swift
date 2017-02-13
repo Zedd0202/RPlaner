@@ -21,10 +21,17 @@ class ToDoListViewController: UITableViewController {
         self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
        
         self.title = "RPlaner"
-        
+        addButton.target = self
+        addButton.action = #selector(ToDoListViewController.onClickAddButton(sender:))
+
 
     }
+    func onClickAddButton(sender: UIBarButtonItem) {
+        self.todo = nil
+        self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
+    }
 
+    @IBOutlet weak var addButton: UIBarButtonItem!
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,6 +55,13 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ToDoListViewCell
         self.todo = cell.todo
+        self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "toNewToDoViewController") {
+            let newToDoVC = segue.destination as! NewToDoCreateViewController
+            newToDoVC.todo = self.todo
+        }
     }
     var deleteTableIndexPath: NSIndexPath? = nil
 
@@ -55,6 +69,8 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+            
+            
         }
         
 
@@ -106,7 +122,6 @@ class ToDoListViewController: UITableViewController {
 //        deleteTableIndexPath = nil
 //    }
     
-   
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
@@ -144,11 +159,7 @@ class ToDoListViewController: UITableViewController {
         }
     }
     
-    
-    func onClickAddButton(sender: UIBarButtonItem) {
-        self.todo = nil
-        self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
-    }
+   
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {
         tableView.reloadData()
     }

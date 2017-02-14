@@ -39,6 +39,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         todoCompleteOptionTextField?.text = "동안"
         todoDaysTextField?.delegate = self
         todoTitleTextField?.delegate = self
+        todoCompleteOptionTextField?.delegate = self
         todoMemo?.delegate = self
         
         let deadLineNumberPicker = UIPickerView()
@@ -74,6 +75,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         
         todoDaysTextField?.inputAccessoryView = toolBar
+        
+
         todoCompleteOptionTextField?.inputAccessoryView = toolBar
         //pickerView.selectRow(7, inComponent: 0, animated: true)
         

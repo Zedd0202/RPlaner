@@ -11,7 +11,7 @@ import RealmSwift
 
 
 class ToDoListViewController: UITableViewController {
-    
+    let realm = try? Realm()
     var todoList = ToDoList()
     var todo: ToDo?
     //var aa = Count()
@@ -19,7 +19,7 @@ class ToDoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
         
@@ -49,6 +49,8 @@ class ToDoListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath) as? ToDoListViewCell
         cell?.todo = (todoList.items?[indexPath.row])
         return cell!
+        
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -131,6 +133,8 @@ class ToDoListViewController: UITableViewController {
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
             
+//            var sortedStuff = realm?.objects(ToDo.self).filter("planTitle")
+//            sortedStuff?.sorted(byKeyPath: "planTitle", ascending: true)
             // A-Z
             //            var sortedStuff = todoList.items!.sorted(todoList.items, { (left: Int, right: Int) -> Bool in left < right })
             //            self.todoList = self.todoList.items!.sorted(by: { (left: ToDo, right: ToDo) -> Bool in

@@ -12,13 +12,22 @@ import RealmSwift
 class ToDoList {
     
   // var count : Int = 0
-    var items: Results<ToDo>? {
-        let realm = try? Realm()
-        return realm?.objects(ToDo.self)
-    }
+    var items: Results<ToDo>?
+//    {
+//        let realm = try? Realm()
+//        return realm?.objects(ToDo.self)
+//    }
 //    var counts : Results<ToDo>? {
 //        let countRealm = try? Realm()
 //        return countRealm?.objects(ToDo.self)
+//    }
+    
+//    init() {
+//        super.init()
+//        
+//                let realm = try? Realm()
+//                return realm?.objects(ToDo.self)
+//        self.items =
 //    }
     
     func delete(index: Int) {

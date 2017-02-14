@@ -19,10 +19,20 @@ class PickToDoViewController: UIViewController {
     //var aa = Count()
     var count : Int = 0
     var randomIndex:Int?
+    let userDefaults = UserDefaults.standard
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         completionButton.isHidden = true
+        self.todoList.items = realm?.objects(ToDo.self)
+        if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
+            displayTodoLabel.text = doingTodo.planTitle
+            completionButton.isHidden = false
+            pickRandomToDoButton.isHidden = true
+            //let currentIndex = doingTodo.index(ofAccessibilityElement: doingTodo)
+
+        }
         print(count)
         // Do any additional setup after loading the view.
     }
@@ -30,7 +40,9 @@ class PickToDoViewController: UIViewController {
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
-        if ((todoList.items?.count))! >  0{
+      
+        if (todoList.items?.count)! >  0
+        {
             while  true{
                 let ccount = realm?.objects(ToDo.self).filter("isComplete == true")
                 if ccount?.count == todoList.items?.count{
@@ -50,6 +62,8 @@ class PickToDoViewController: UIViewController {
                     realm.beginWrite()
                     todoList.items?[randomIndex!].isDoing = true
                     try? realm.commitWrite()
+                    userDefaults.setValue(randomIndex, forKey: "randomIndex")
+                    userDefaults.synchronize()
                     break
                 }
                 else{
@@ -64,6 +78,8 @@ class PickToDoViewController: UIViewController {
         }
     }
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
+        
+        if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
         completionButton.isHidden = true
         pickRandomToDoButton.isHidden = false
         displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
@@ -73,7 +89,16 @@ class PickToDoViewController: UIViewController {
         realm.beginWrite()
         
         //todoList.complete()
-        todoList.items?[randomIndex!].isComplete = true
+            doingTodo.isComplete = true
+
+
+            doingTodo.isDoing = false
+//        todoList.items?[randomIndex!].isComplete = true
+//        
+//        
+//        todoList.items?[randomIndex!].isDoing = false
+
+
 //        count = count + 1//유저디폴트
 //        let userDefaults = UserDefaults.standard
 //        userDefaults.setValue(count, forKey: "count")
@@ -82,7 +107,7 @@ class PickToDoViewController: UIViewController {
         try? realm.commitWrite()
         
     }
-    
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -96,10 +121,22 @@ class PickToDoViewController: UIViewController {
                 completionButton.isHidden = false
                 
             }
-            else{
-                self.displayTodoLabel.text = displayTodoLabel.text
-            }
+            
+            
         }
+        else{
+            
+            if displayTodoLabel.text == "다음 계획을 생성하려면 클릭버튼을 눌러주세요"{
+                return
+            }
+            if displayTodoLabel.text == "모든 계획이 완료"{
+                return
+            }
+            else{
+            self.displayTodoLabel.text = "삭제된 계획입니다"
+            pickRandomToDoButton.isHidden = false
+            completionButton.isHidden = true
+            }}
         // let memes = realm.objects()
         
         

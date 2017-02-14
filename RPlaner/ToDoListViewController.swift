@@ -23,6 +23,10 @@ class ToDoListViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
         
+        let realm = try? Realm()
+
+        self.todoList.items = realm?.objects(ToDo.self)
+        
         self.title = "RPlaner"
         addButton?.target = self
         addButton?.action = #selector(ToDoListViewController.onClickAddButton(sender:))
@@ -54,7 +58,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
+        return UITableViewAutomaticDimension
     }
     
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -132,9 +136,17 @@ class ToDoListViewController: UITableViewController {
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
+            tableView.beginUpdates()
+
+            let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "planTitle", ascending: true)
             
-//            var sortedStuff = realm?.objects(ToDo.self).filter("planTitle")
-//            sortedStuff?.sorted(byKeyPath: "planTitle", ascending: true)
+            self.todoList.items = sortedStuff
+            
+            tableView.reloadData()
+//            tableView.endUpdates()
+
+            
+           // print(sortedStuff?.first?.planTitle)
             // A-Z
             //            var sortedStuff = todoList.items!.sorted(todoList.items, { (left: Int, right: Int) -> Bool in left < right })
             //            self.todoList = self.todoList.items!.sorted(by: { (left: ToDo, right: ToDo) -> Bool in
@@ -152,7 +164,16 @@ class ToDoListViewController: UITableViewController {
             //    }
             
             
-        }}
+        } else if sender.selectedSegmentIndex == 1 {
+            
+            // 제목대신 날짜로 바꾸기
+            let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "planTitle", ascending: true)
+            
+            self.todoList.items = sortedStuff
+            self.tableView.reloadData()
+            
+        }
+    }
     
     
     
@@ -169,6 +190,7 @@ class ToDoListViewController: UITableViewController {
         }
     }
     
+   
     
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {
         tableView.reloadData()

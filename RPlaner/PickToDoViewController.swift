@@ -11,43 +11,44 @@ import GameplayKit
 import RealmSwift
 
 class PickToDoViewController: UIViewController {
-    let realm = try! Realm()
+    let realm = try? Realm()
     
     var todoList = ToDoList()
     var todo: ToDo?
-    // var count = Count()
+    //var completeTodo = [ToDo]()
+    //var aa = Count()
     var count : Int = 0
-    var randomIndex:Int!
+    var randomIndex:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         completionButton.isHidden = true
+        print(count)
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var displayTodoLabel: UILabel!
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
-        if (todoList.items?.count)! >  0{
+        if ((todoList.items?.count))! >  0{
             while  true{
-                
-                print(count)
-                if count == todoList.items?.count{
+                let ccount = realm?.objects(ToDo.self).filter("isComplete == true")
+                if ccount?.count == todoList.items?.count{
                     
                     displayTodoLabel.text = "모든 계획이 완료"
                     break;
                 }
                 self.randomIndex = Int(arc4random_uniform(UInt32((todoList.items?.count)!)))
-                if(todoList.items?[randomIndex].isComplete == false){
+                if((todoList.items?[randomIndex!].isComplete)! == false){
                     displayTodoLabel.isHidden = false
-                    displayTodoLabel.text = todoList.items?[randomIndex].planTitle
+                    displayTodoLabel.text = todoList.items?[randomIndex!].planTitle
                     pickRandomToDoButton.isHidden = true
                     completionButton.isHidden = false
                     
                     
                     let realm = try! Realm()
                     realm.beginWrite()
-                    todoList.items?[randomIndex].isDoing = true
+                    todoList.items?[randomIndex!].isDoing = true
                     try? realm.commitWrite()
                     break
                 }
@@ -71,12 +72,13 @@ class PickToDoViewController: UIViewController {
         let realm = try! Realm()
         realm.beginWrite()
         
-        todoList.items?[randomIndex].isComplete = true
-        count = count + 1//유저디폴트
-        let userDefaults = UserDefaults.standard
-        userDefaults.setValue(count, forKey: "count")
-        userDefaults.synchronize()
-        print(count)
+        //todoList.complete()
+        todoList.items?[randomIndex!].isComplete = true
+//        count = count + 1//유저디폴트
+//        let userDefaults = UserDefaults.standard
+//        userDefaults.setValue(count, forKey: "count")
+//        userDefaults.synchronize()
+//        print(count)
         try? realm.commitWrite()
         
     }

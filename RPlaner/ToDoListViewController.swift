@@ -14,7 +14,8 @@ class ToDoListViewController: UITableViewController {
     
     var todoList = ToDoList()
     var todo: ToDo?
-    
+    //var aa = Count()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +24,8 @@ class ToDoListViewController: UITableViewController {
         self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
         
         self.title = "RPlaner"
-        addButton.target = self
-        addButton.action = #selector(ToDoListViewController.onClickAddButton(sender:))
+        addButton?.target = self
+        addButton?.action = #selector(ToDoListViewController.onClickAddButton(sender:))
         
         
     }
@@ -33,7 +34,7 @@ class ToDoListViewController: UITableViewController {
         self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
     }
     
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem?
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,9 +46,9 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath) as! ToDoListViewCell
-        cell.todo = (todoList.items?[indexPath.row])!
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath) as? ToDoListViewCell
+        cell?.todo = (todoList.items?[indexPath.row])
+        return cell!
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -83,6 +84,7 @@ class ToDoListViewController: UITableViewController {
             let indexPaths = NSIndexPath(row: editActionsForRowAt.row, section: editActionsForRowAt.section)
             
             tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
+            //self.aa.completeTodo.remove(at: editActionsForRowAt.row)
             tableView.endUpdates()
             print(self.todoList.items?.count)
             //            self.deleteTableIndexPath = editActionsForRowAt as NSIndexPath?
@@ -155,6 +157,7 @@ class ToDoListViewController: UITableViewController {
         if editingStyle == .delete {
             tableView.beginUpdates()
             todoList.delete(index: indexPath.row)
+            
             let indexPaths = NSIndexPath(row: indexPath.row, section: indexPath.section)
             
             tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)

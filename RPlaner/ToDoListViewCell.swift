@@ -9,10 +9,10 @@
 import UIKit
 
 class ToDoListViewCell: UITableViewCell {
-    @IBOutlet weak var todoListTitleLabel: UILabel!
+    @IBOutlet weak var todoListTitleLabel: UILabel?
     var todo: ToDo? {
         didSet {
-            todoListTitleLabel.text = todo?.planTitle
+            todoListTitleLabel?.text = todo?.planTitle
         }
     }
     

@@ -11,16 +11,24 @@ import RealmSwift
 
 class ToDoList {
     
+  // var count : Int = 0
     var items: Results<ToDo>? {
-        let realm = try! Realm()
-        return realm.objects(ToDo.self)
+        let realm = try? Realm()
+        return realm?.objects(ToDo.self)
     }
+//    var counts : Results<ToDo>? {
+//        let countRealm = try? Realm()
+//        return countRealm?.objects(ToDo.self)
+//    }
     
     func delete(index: Int) {
         do {
             let realm = try Realm()
+           // let countRealm = try? Realm()
+
             try realm.write {
                 realm.delete((items?[index])!)
+              // countRealm?.delete((items?[index])!)
             }
         } catch {
             print("realm delete error")
@@ -35,7 +43,7 @@ class ToDoList {
         toDo.TimeOfCompletion = completionOption
         toDo.memo = memoText
         toDo.isComplete = false
-    
+        //count = count + 1
         //toDo.createdAt = NSDate()
         
         do {
@@ -63,5 +71,22 @@ class ToDoList {
         }
     }
     
+    
+//    func complete() {
+//        let toDo = ToDo()
+//        
+//       
+//      
+//        
+//        do {
+//            let countRealm = try Realm()
+//            try countRealm.write {
+//                countRealm.add(toDo)
+//            }
+//        } catch {
+//            print("realm add error")
+//        }
+//    }
+
 }
 

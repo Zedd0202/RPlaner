@@ -8,6 +8,7 @@
 
 import Foundation
 
-class Count {
-    var count : Int = 0
-}
+//class Count {
+//    
+//    var completeTodo = [ToDo]()
+//}

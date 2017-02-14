@@ -27,29 +27,30 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     }
     var state: State = .Create
     
-    @IBOutlet weak var todoMemo: UITextView!
-    @IBOutlet weak var todoCompleteOptionTextField: UITextField!
-    @IBOutlet weak var todoDaysTextField: UITextField!
-    @IBOutlet weak var todoTitleTextField: UITextField!
+    @IBOutlet weak var todoMemo: UITextView?
+    @IBOutlet weak var todoCompleteOptionTextField: UITextField?
+    @IBOutlet weak var todoDaysTextField: UITextField?
+    @IBOutlet weak var todoTitleTextField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.todoMemo.layer.borderWidth = 1.0
-        self.todoMemo.layer.borderColor = UIColor.black.cgColor
-        todoCompleteOptionTextField.text = "동안"
-        todoDaysTextField.delegate = self
-        todoTitleTextField.delegate = self
-        todoMemo.delegate = self
+        self.todoMemo?.layer.borderWidth = 1.0
+        self.todoMemo?.layer.borderColor = UIColor.black.cgColor
+        todoCompleteOptionTextField?.text = "동안"
+        todoDaysTextField?.delegate = self
+        todoTitleTextField?.delegate = self
+        todoMemo?.delegate = self
+        
         let deadLineNumberPicker = UIPickerView()
         deadLineNumberPicker.delegate = self
         deadLineNumberPicker.dataSource = self
-        todoDaysTextField.delegate = self
-        todoDaysTextField.text = "3"
-        todoDaysTextField.textAlignment = NSTextAlignment.center
+        todoDaysTextField?.delegate = self
+        todoDaysTextField?.text = "3"
+        todoDaysTextField?.textAlignment = NSTextAlignment.center
         
         
-        todoDaysTextField.inputView = deadLineNumberPicker
-        todoCompleteOptionTextField.inputView = deadLineNumberPicker
+        todoDaysTextField?.inputView = deadLineNumberPicker
+        todoCompleteOptionTextField?.inputView = deadLineNumberPicker
         
         let pickerView = UIPickerView(frame: CGRect(x : 0,y: 200, width : view.frame.width, height : 300))
         pickerView.backgroundColor = .white
@@ -72,15 +73,15 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         toolBar.isUserInteractionEnabled = true
         
         
-        todoDaysTextField.inputAccessoryView = toolBar
-        todoCompleteOptionTextField.inputAccessoryView = toolBar
+        todoDaysTextField?.inputAccessoryView = toolBar
+        todoCompleteOptionTextField?.inputAccessoryView = toolBar
         //pickerView.selectRow(7, inComponent: 0, animated: true)
         
         
         
-        let paddingView = UIView(frame: CGRect(x : 0,y: 0, width : 10, height : self.todoTitleTextField.frame.height))
-        todoTitleTextField.leftView = paddingView
-        todoTitleTextField.leftViewMode = UITextFieldViewMode.always
+        let paddingView = UIView(frame: CGRect(x : 0,y: 0, width : 10, height : (self.todoTitleTextField?.frame.height)!))
+        todoTitleTextField?.leftView = paddingView
+        todoTitleTextField?.leftViewMode = UITextFieldViewMode.always
         
         
         
@@ -89,13 +90,13 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         
         if todo != nil {
-            self.todoTitleTextField.text = todo?.planTitle
-            self.todoDaysTextField.text = todo?.deadLineNumber
-            self.todoCompleteOptionTextField.text = todo?.TimeOfCompletion
-            self.todoMemo.text = todo?.memo
+            self.todoTitleTextField?.text = todo?.planTitle
+            self.todoDaysTextField?.text = todo?.deadLineNumber
+            self.todoCompleteOptionTextField?.text = todo?.TimeOfCompletion
+            self.todoMemo?.text = todo?.memo
             state = .Update
         } else {
-            self.todoTitleTextField.placeholder = "계획을 입력해주세요."
+            self.todoTitleTextField?.placeholder = "계획을 입력해주세요."
             
             state = .Create
         }
@@ -114,9 +115,9 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             return
         }
         if state == .Create {
-            ToDoList().create(name: todoTitleTextField.text!, deadline: todoDaysTextField.text!, completionOption : todoCompleteOptionTextField.text!, memoText: todoMemo.text)
+            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
         } else if state == .Update {
-            ToDoList().update(todo: todo, name: todoTitleTextField.text!, deadline: todoDaysTextField.text!, completionOption : todoCompleteOptionTextField.text!, memoText: todoMemo.text)
+            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
         }
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
     }
@@ -126,7 +127,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     //    }
     
     private func isValidate() -> Bool {
-        if let name = todoTitleTextField.text {
+        if let name = todoTitleTextField?.text {
             if name.characters.count == 0 {
                 return false
             }
@@ -138,7 +139,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     
     func donePicker() {
-        todoDaysTextField.resignFirstResponder()
+        todoDaysTextField?.resignFirstResponder()
     }
     
     
@@ -183,9 +184,9 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         switch component {
         case Component.Section.days.rawValue:
-            self.todoDaysTextField.text = Component.pickOption[row]
+            self.todoDaysTextField?.text = Component.pickOption[row]
         case Component.Section.completeOption.rawValue:
-            self.todoCompleteOptionTextField.text = Component.completeOption[row]
+            self.todoCompleteOptionTextField?.text = Component.completeOption[row]
             
             
         default :
@@ -195,11 +196,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     }
     
     
-    private func setupRPPlanCreateView(){
-        self.todoMemo.layer.borderWidth = 1.0
-        self.todoMemo.layer.borderColor = UIColor.black.cgColor
-    }
-    
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -216,6 +213,9 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+  
+        
+        
         unsubscribeFromKeyboardNotifications()
         
     }
@@ -229,14 +229,14 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     
     func keyboardWillShow(_ notification:Notification) {
-        if todoMemo.isFirstResponder{
+        if (todoMemo?.isFirstResponder)!{
             view.frame.origin.y = 0 - getKeyboardHeight(notification)
         }
         
     }
     //키보드가 사라질 때 수행되는 함수
     func keyboardWillHide(_ notification:Notification){
-        if todoMemo.isFirstResponder{
+        if (todoMemo?.isFirstResponder)!{
             view.frame.origin.y = view.frame.origin.y + getKeyboardHeight(notification)
         }
     }

@@ -19,19 +19,19 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         static let completeOption = ["동안", "내내"]
         static let pickOption = ["1", "2", "3", "4", "5", "6", "7"]
     }
-
+    
     var todo: ToDo? = nil
     enum State: String {
         case Update = "수정"
         case Create = "생성"
     }
     var state: State = .Create
-
+    
     @IBOutlet weak var todoMemo: UITextView!
     @IBOutlet weak var todoCompleteOptionTextField: UITextField!
     @IBOutlet weak var todoDaysTextField: UITextField!
     @IBOutlet weak var todoTitleTextField: UITextField!
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.todoMemo.layer.borderWidth = 1.0
@@ -81,8 +81,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         let paddingView = UIView(frame: CGRect(x : 0,y: 0, width : 10, height : self.todoTitleTextField.frame.height))
         todoTitleTextField.leftView = paddingView
         todoTitleTextField.leftViewMode = UITextFieldViewMode.always
-
-
+        
+        
         
         
         
@@ -104,8 +104,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
         self.navigationItem.rightBarButtonItem = saveButton
         
-//        let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
-//        self.navigationItem.leftBarButtonItem = cancelButton
+        //        let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
+        //        self.navigationItem.leftBarButtonItem = cancelButton
         // Do any additional setup after loading the view.
     }
     
@@ -120,10 +120,10 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         }
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
     }
-//    func onClickCancelButton(sender: UIBarButtonItem) {
-//        dismiss(animated: true, completion: nil)
-//        
-//    }
+    //    func onClickCancelButton(sender: UIBarButtonItem) {
+    //        dismiss(animated: true, completion: nil)
+    //
+    //    }
     
     private func isValidate() -> Bool {
         if let name = todoTitleTextField.text {
@@ -135,19 +135,19 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         }
         return true
     }
-
+    
     
     func donePicker() {
         todoDaysTextField.resignFirstResponder()
     }
-   
-   
-
-   
     
-   
     
- 
+    
+    
+    
+    
+    
+    
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -272,15 +272,15 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

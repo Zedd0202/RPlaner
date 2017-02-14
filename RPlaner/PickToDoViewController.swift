@@ -12,10 +12,10 @@ import RealmSwift
 
 class PickToDoViewController: UIViewController {
     let realm = try! Realm()
-
+    
     var todoList = ToDoList()
     var todo: ToDo?
-   // var count = Count()
+    // var count = Count()
     var count : Int = 0
     var randomIndex:Int!
     
@@ -28,12 +28,12 @@ class PickToDoViewController: UIViewController {
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
-        if (todoList.items?.count)! >  0
-        {
+        if (todoList.items?.count)! >  0{
             while  true{
                 
-                
+                print(count)
                 if count == todoList.items?.count{
+                    
                     displayTodoLabel.text = "모든 계획이 완료"
                     break;
                 }
@@ -46,19 +46,12 @@ class PickToDoViewController: UIViewController {
                     
                     
                     let realm = try! Realm()
-                    
                     realm.beginWrite()
-                    
                     todoList.items?[randomIndex].isDoing = true
-                    
                     try? realm.commitWrite()
-
-                    
-                    
                     break
                 }
                 else{
-                    
                     continue
                 }
             }
@@ -68,9 +61,6 @@ class PickToDoViewController: UIViewController {
             displayTodoLabel.isHidden = false
             displayTodoLabel.text = "계획을 먼저 생성해 주세요ㅠㅠ"
         }
-        
-        
-        
     }
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
         completionButton.isHidden = true
@@ -79,7 +69,6 @@ class PickToDoViewController: UIViewController {
         
         
         let realm = try! Realm()
-
         realm.beginWrite()
         
         todoList.items?[randomIndex].isComplete = true
@@ -99,19 +88,19 @@ class PickToDoViewController: UIViewController {
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first {
             
             if doingTodo.isComplete == false{
-            self.displayTodoLabel.text = doingTodo.planTitle
-            //print(doingTodo.planTitle)
-            pickRandomToDoButton.isHidden = true
-            completionButton.isHidden = false
-            
+                self.displayTodoLabel.text = doingTodo.planTitle
+                //print(doingTodo.planTitle)
+                pickRandomToDoButton.isHidden = true
+                completionButton.isHidden = false
+                
             }
             else{
                 self.displayTodoLabel.text = displayTodoLabel.text
             }
         }
-       // let memes = realm.objects()
+        // let memes = realm.objects()
         
-
+        
         
     }
     

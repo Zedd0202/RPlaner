@@ -12,12 +12,12 @@ class ToDoDetailViewController: UIViewController {
     
     var todoList = ToDoList()
     var todo: ToDo?
-
+    
     @IBOutlet weak var detailMemo: UITextView!
     @IBOutlet weak var detailToDoCompletionOption: UILabel!
-    
     @IBOutlet weak var detailDays: UILabel!
     @IBOutlet weak var detailToDoTitle: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         editButton.target = self
@@ -45,14 +45,14 @@ class ToDoDetailViewController: UIViewController {
             newToDoVC.todo = self.todo
         }
     }
-       /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

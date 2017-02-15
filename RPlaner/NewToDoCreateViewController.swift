@@ -126,6 +126,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     }
         func onClickCancelButton(sender: UIBarButtonItem) {
             dismiss(animated: true, completion: nil)
+//            _ = self.navigationController?.popViewController(animated: true)
     
         }
     

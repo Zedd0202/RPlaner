@@ -21,6 +21,7 @@ class PickToDoViewController: UIViewController {
     var randomIndex:Int?
     let userDefaults = UserDefaults.standard
 
+    @IBOutlet weak var circularProgressView: KDCircularProgress!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,6 +140,7 @@ class PickToDoViewController: UIViewController {
             
             if displayTodoLabel.text == "다음 계획을 생성하려면 클릭버튼을 눌러주세요"{
                displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+                print("aa")
                 userDefaults.synchronize()
                 return
             }

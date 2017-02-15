@@ -22,34 +22,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHp-Pg-Q1C">
-                                <rect key="frame" x="16" y="242" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9H6-3i-pEk">
-                                <rect key="frame" x="172" y="356" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="클릭"/>
-                                <connections>
-                                    <action selector="tapPickRandomToDoButton:" destination="kHt-fO-Mca" eventType="touchUpInside" id="RJC-ny-Qgr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCQ-Yd-tMg">
-                                <rect key="frame" x="164" y="469" width="46" height="30"/>
+                                <rect key="frame" x="302" y="507" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="완료"/>
                                 <connections>
                                     <action selector="tapToDoCompleteButton:" destination="kHt-fO-Mca" eventType="touchUpInside" id="4KY-Ni-20H"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMP-qc-T0Y" customClass="KDCircularProgress" customModule="RPlaner" customModuleProvider="target">
+                                <rect key="frame" x="67" y="261" width="240" height="219"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="angle">
+                                        <real key="value" value="90"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="startAngle">
+                                        <real key="value" value="-90"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackColor">
+                                        <color key="value" red="1" green="0.59629610769999997" blue="0.58389668610000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="IBColor1">
+                                        <color key="value" red="1" green="0.96387178090000003" blue="0.42504084889999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9H6-3i-pEk">
+                                <rect key="frame" x="47" y="507" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="클릭"/>
+                                <connections>
+                                    <action selector="tapPickRandomToDoButton:" destination="kHt-fO-Mca" eventType="touchUpInside" id="RJC-ny-Qgr"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wHp-Pg-Q1C">
+                                <rect key="frame" x="16" y="70" width="343" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Random Plan" id="jQS-pX-Rck"/>
                     <connections>
+                        <outlet property="circularProgressView" destination="kMP-qc-T0Y" id="NTz-u5-y39"/>
                         <outlet property="completionButton" destination="mCQ-Yd-tMg" id="Lo1-Rx-qPy"/>
                         <outlet property="displayTodoLabel" destination="wHp-Pg-Q1C" id="oYu-zc-dXb"/>
                         <outlet property="pickRandomToDoButton" destination="9H6-3i-pEk" id="64u-EK-atd"/>
@@ -280,13 +301,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AAH-uk-erh">
-                                <rect key="frame" x="94" y="309" width="265" height="311"/>
+                                <rect key="frame" x="94" y="353" width="265" height="218"/>
                                 <color key="backgroundColor" red="1" green="0.59629610769999997" blue="0.58389668610000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="XEP-Y9-8fC">
-                                <rect key="frame" x="94" y="80" width="265" height="47"/>
+                                <rect key="frame" x="94" y="124" width="265" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -296,7 +317,6 @@
                         <constraints>
                             <constraint firstItem="AAH-uk-erh" firstAttribute="top" secondItem="9wm-Ot-ul5" secondAttribute="bottom" constant="289" id="1I9-eM-oEN"/>
                             <constraint firstItem="AAH-uk-erh" firstAttribute="leading" secondItem="8ni-F0-ylW" secondAttribute="leadingMargin" constant="78" id="3ld-Jx-V5M"/>
-                            <constraint firstItem="kDq-Gw-ixO" firstAttribute="top" secondItem="XEP-Y9-8fC" secondAttribute="bottom" constant="540" id="7dc-Si-yUk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AAH-uk-erh" secondAttribute="trailing" id="7qI-bL-Wb6"/>
                             <constraint firstItem="XEP-Y9-8fC" firstAttribute="leading" secondItem="8ni-F0-ylW" secondAttribute="leadingMargin" constant="78" id="Af1-ol-93x"/>
                             <constraint firstItem="kDq-Gw-ixO" firstAttribute="top" secondItem="AAH-uk-erh" secondAttribute="bottom" constant="47" id="Hsz-Ls-qfz"/>

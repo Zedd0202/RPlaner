@@ -13,6 +13,7 @@
 		144CD1091E4DC57E00479D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144CD1081E4DC57E00479D13 /* Assets.xcassets */; };
 		144CD10C1E4DC57E00479D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144CD10A1E4DC57E00479D13 /* LaunchScreen.storyboard */; };
 		145CACFF1E5197F000B4014A /* ToDoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145CACFE1E5197F000B4014A /* ToDoDetailViewController.swift */; };
+		1466DB361E54196B0036652A /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466DB351E54196B0036652A /* KDCircularProgress.swift */; };
 		14C606BB1E4DE97F00FEB1CB /* NewToDoCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C606BA1E4DE97F00FEB1CB /* NewToDoCreateViewController.swift */; };
 		14C606BD1E4DF20500FEB1CB /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C606BC1E4DF20500FEB1CB /* ToDoListViewController.swift */; };
 		14C606BF1E4DF22000FEB1CB /* ToDoListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C606BE1E4DF22000FEB1CB /* ToDoListViewCell.swift */; };
@@ -30,6 +31,7 @@
 		144CD10B1E4DC57E00479D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		144CD10D1E4DC57E00479D13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145CACFE1E5197F000B4014A /* ToDoDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToDoDetailViewController.swift; path = RPlaner/ToDoDetailViewController.swift; sourceTree = "<group>"; };
+		1466DB351E54196B0036652A /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		14C606BA1E4DE97F00FEB1CB /* NewToDoCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewToDoCreateViewController.swift; path = RPlaner/NewToDoCreateViewController.swift; sourceTree = "<group>"; };
 		14C606BC1E4DF20500FEB1CB /* ToDoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToDoListViewController.swift; path = RPlaner/ToDoListViewController.swift; sourceTree = "<group>"; };
 		14C606BE1E4DF22000FEB1CB /* ToDoListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToDoListViewCell.swift; path = RPlaner/ToDoListViewCell.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		144CD0F51E4DC57E00479D13 = {
 			isa = PBXGroup;
 			children = (
+				1466DB351E54196B0036652A /* KDCircularProgress.swift */,
 				144967EA1E52F4BF00F9542C /* View */,
 				144967ED1E52F4ED00F9542C /* Cell */,
 				144967EB1E52F4CD00F9542C /* Controller */,
@@ -269,6 +272,7 @@
 				144CD1021E4DC57E00479D13 /* AppDelegate.swift in Sources */,
 				14C606BF1E4DF22000FEB1CB /* ToDoListViewCell.swift in Sources */,
 				14C606BD1E4DF20500FEB1CB /* ToDoListViewController.swift in Sources */,
+				1466DB361E54196B0036652A /* KDCircularProgress.swift in Sources */,
 				14CA75861E4DC631008D96D7 /* ToDoList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -52,6 +52,7 @@ class ToDoList {
         toDo.TimeOfCompletion = completionOption
         toDo.memo = memoText
         toDo.isComplete = false
+        //toDo.createdAt = createdTime as NSDate
         //count = count + 1
         //toDo.createdAt = NSDate()
         
@@ -81,21 +82,6 @@ class ToDoList {
     }
     
     
-//    func complete() {
-//        let toDo = ToDo()
-//        
-//       
-//      
-//        
-//        do {
-//            let countRealm = try Realm()
-//            try countRealm.write {
-//                countRealm.add(toDo)
-//            }
-//        } catch {
-//            print("realm add error")
-//        }
-//    }
 
 }
 

@@ -167,7 +167,7 @@ class ToDoListViewController: UITableViewController {
         } else if sender.selectedSegmentIndex == 1 {
             
             // 제목대신 날짜로 바꾸기
-            let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "planTitle", ascending: true)
+            let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: true)
             
             self.todoList.items = sortedStuff
             self.tableView.reloadData()

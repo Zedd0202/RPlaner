@@ -17,5 +17,6 @@ class ToDo: Object {
      dynamic var memo: String?
      dynamic var isComplete = false
      dynamic var isDoing = false
+     //dynamic var createdAt = NSDate(timeIntervalSince1970: 0)
 }
 

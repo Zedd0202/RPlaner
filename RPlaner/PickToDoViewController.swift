@@ -26,11 +26,20 @@ class PickToDoViewController: UIViewController {
         super.viewDidLoad()
         completionButton.isHidden = true
         self.todoList.items = realm?.objects(ToDo.self)
+        userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
+
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
             displayTodoLabel.text = doingTodo.planTitle
             completionButton.isHidden = false
             pickRandomToDoButton.isHidden = true
+            
             //let currentIndex = doingTodo.index(ofAccessibilityElement: doingTodo)
+
+        }
+       
+        else{
+            userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
+            displayTodoLabel.text = displayTodoLabel.text
 
         }
         print(count)
@@ -89,10 +98,10 @@ class PickToDoViewController: UIViewController {
         realm.beginWrite()
         
         //todoList.complete()
-            doingTodo.isComplete = true
+        doingTodo.isComplete = true
 
 
-            doingTodo.isDoing = false
+        doingTodo.isDoing = false
 //        todoList.items?[randomIndex!].isComplete = true
 //        
 //        
@@ -107,7 +116,7 @@ class PickToDoViewController: UIViewController {
         try? realm.commitWrite()
         
     }
-    }
+}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -126,19 +135,30 @@ class PickToDoViewController: UIViewController {
         }
         else{
             
+            displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+            
             if displayTodoLabel.text == "다음 계획을 생성하려면 클릭버튼을 눌러주세요"{
+               displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+                userDefaults.synchronize()
                 return
             }
             if displayTodoLabel.text == "모든 계획이 완료"{
+                //self.displayTodoLabel.text = "모든 계획이 완료"
+                displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+                userDefaults.synchronize()
                 return
             }
             else{
             self.displayTodoLabel.text = "삭제된 계획입니다"
             pickRandomToDoButton.isHidden = false
             completionButton.isHidden = true
-            }}
+            
+            }
+            
+        }
         // let memes = realm.objects()
-        
+//                userDefaults.setValue(displayTodoLabel.text, forKey: "displayTodoLabel")
+//                userDefaults.synchronize()
         
         
     }

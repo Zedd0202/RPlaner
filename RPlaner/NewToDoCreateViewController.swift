@@ -75,9 +75,9 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         
         todoDaysTextField?.inputAccessoryView = toolBar
-        
-
         todoCompleteOptionTextField?.inputAccessoryView = toolBar
+        
+        
         //pickerView.selectRow(7, inComponent: 0, animated: true)
         
         
@@ -108,8 +108,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
         self.navigationItem.rightBarButtonItem = saveButton
         
-        //        let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
-        //        self.navigationItem.leftBarButtonItem = cancelButton
+                let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
+                self.navigationItem.leftBarButtonItem = cancelButton
         // Do any additional setup after loading the view.
     }
     
@@ -124,10 +124,10 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         }
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
     }
-    //    func onClickCancelButton(sender: UIBarButtonItem) {
-    //        dismiss(animated: true, completion: nil)
-    //
-    //    }
+        func onClickCancelButton(sender: UIBarButtonItem) {
+            dismiss(animated: true, completion: nil)
+    
+        }
     
     private func isValidate() -> Bool {
         if let name = todoTitleTextField?.text {
@@ -142,8 +142,11 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     
     func donePicker() {
-        todoDaysTextField?.resignFirstResponder()
+        todoDaysTextField?.endEditing(true)
+        todoCompleteOptionTextField?.endEditing(true)
+        
     }
+    
     
     
     

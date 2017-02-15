@@ -39,11 +39,30 @@ class ToDoDetailViewController: UIViewController {
         //self.todo = nil
         self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
     }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if (segue.identifier == "toNewToDoViewController") {
+//            let newToDoVC = segue.destination as! NewToDoCreateViewController
+//            newToDoVC.todo = self.todo
+//        }
+//    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "toNewToDoViewController") {
-            let newToDoVC = segue.destination as! NewToDoCreateViewController
-            newToDoVC.todo = self.todo
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        
+        if segue.identifier == "toNewToDoViewController"  {
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? NewToDoCreateViewController {
+                    chidVC.todo = self.todo
+                    
+                }
+                
+            }
+            
         }
+        
     }
     /*
      // MARK: - Navigation

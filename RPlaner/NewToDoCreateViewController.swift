@@ -105,25 +105,27 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         }
         self.title = state.rawValue
         
-        let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
-        self.navigationItem.rightBarButtonItem = saveButton
-        
-                let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
-                self.navigationItem.leftBarButtonItem = cancelButton
+//        let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
+//        self.navigationItem.rightBarButtonItem = saveButton
+//        
+//                let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
+//                self.navigationItem.leftBarButtonItem = cancelButton
         // Do any additional setup after loading the view.
     }
     
-    func onClickSaveButton(sender: UIBarButtonItem) {
-        if isValidate() == false {
-            return
-        }
-        if state == .Create {
-            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
-        } else if state == .Update {
-            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
-        }
-        self.performSegue(withIdentifier: "returnToDoList", sender: self)
-    }
+    
+//    func onClickSaveButton(sender: UIBarButtonItem) {
+//        if isValidate() == false {
+//            return
+//        }
+//        if state == .Create {
+//            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+//        } else if state == .Update {
+//            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+//        }
+//        self.performSegue(withIdentifier: "returnToDoList", sender: self)
+//    }
+    
         func onClickCancelButton(sender: UIBarButtonItem) {
             dismiss(animated: true, completion: nil)
 //            _ = self.navigationController?.popViewController(animated: true)
@@ -153,9 +155,26 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+
+    }
     
     
     
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        if isValidate() == false {
+            return
+        }
+        if state == .Create {
+            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+        } else if state == .Update {
+            //self.title = todoTitleTextField?.text
+            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+        }
+        self.performSegue(withIdentifier: "returnToDoList", sender: self)
+
+    }
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2

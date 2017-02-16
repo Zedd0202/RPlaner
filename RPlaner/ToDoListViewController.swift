@@ -28,15 +28,21 @@ class ToDoListViewController: UITableViewController {
         self.todoList.items = realm?.objects(ToDo.self)
         
         self.title = "RPlaner"
-        addButton?.target = self
-        addButton?.action = #selector(ToDoListViewController.onClickAddButton(sender:))
+//        addButton?.target = self
+//        addButton?.action = #selector(ToDoListViewController.onClickAddButton(sender:))
         
         
+//    }
+//    func onClickAddButton(sender: UIBarButtonItem) {
+//        self.todo = nil
+//        self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
+//    }
     }
-    func onClickAddButton(sender: UIBarButtonItem) {
+    @IBAction func addButtonTapped(_ sender: Any) {
         self.todo = nil
         self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
     }
+   
     
     @IBOutlet weak var addButton: UIBarButtonItem?
     override func didReceiveMemoryWarning() {

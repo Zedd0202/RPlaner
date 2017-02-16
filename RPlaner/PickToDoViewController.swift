@@ -10,17 +10,21 @@ import UIKit
 import GameplayKit
 import RealmSwift
 
-class PickToDoViewController: UIViewController {
+class PickToDoViewController: UIViewController,CountdownTimerDelegate {
     let realm = try? Realm()
-    
+    var currentTime = NSDate()
     var todoList = ToDoList()
     var todo: ToDo?
     //var completeTodo = [ToDo]()
     //var aa = Count()
-    var count : Int = 0
+    //var count : Int = 0
+    
+    var timer: CountdownTimer!
+
     var randomIndex:Int?
     let userDefaults = UserDefaults.standard
 
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var circularProgressView: KDCircularProgress!
     
     override func viewDidLoad() {
@@ -33,30 +37,37 @@ class PickToDoViewController: UIViewController {
             displayTodoLabel.text = doingTodo.planTitle
             completionButton.isHidden = false
             pickRandomToDoButton.isHidden = true
-            
+            timeLabel.isHidden = false
+          
             //let currentIndex = doingTodo.index(ofAccessibilityElement: doingTodo)
+            
 
         }
        
         else{
             userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
             displayTodoLabel.text = displayTodoLabel.text
+            //timeLabel.isHidden = true
 
         }
-        print(count)
-        // Do any additional setup after loading the view.
+          timer = CountdownTimer(timerLabel: timeLabel, startingDay : 2, startingHour :0,startingMin: 0, startingSec: 0)
+        timer.delegate = self
+    }
+    func countdownEnded() -> Void {
+        // Handle countdown finishing
     }
     @IBOutlet weak var displayTodoLabel: UILabel!
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
-      
+        timeLabel.isHidden = false
         if (todoList.items?.count)! >  0
         {
             while  true{
                 let ccount = realm?.objects(ToDo.self).filter("isComplete == true")
                 if ccount?.count == todoList.items?.count{
-                    
+                    timeLabel.isHidden = true
+
                     displayTodoLabel.text = "모든 계획이 완료"
                     break;
                 }
@@ -66,7 +77,8 @@ class PickToDoViewController: UIViewController {
                     displayTodoLabel.text = todoList.items?[randomIndex!].planTitle
                     pickRandomToDoButton.isHidden = true
                     completionButton.isHidden = false
-                    
+                   
+                    timer.start()
                     
                     let realm = try! Realm()
                     realm.beginWrite()
@@ -89,10 +101,15 @@ class PickToDoViewController: UIViewController {
     }
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
         
+        timeLabel.isHidden = true
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
         completionButton.isHidden = true
         pickRandomToDoButton.isHidden = false
+        timeLabel.isHidden = true
         displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+            timeLabel.isHidden = true
+        timer.reset()
+
         
         
         let realm = try! Realm()
@@ -129,6 +146,7 @@ class PickToDoViewController: UIViewController {
                 //print(doingTodo.planTitle)
                 pickRandomToDoButton.isHidden = true
                 completionButton.isHidden = false
+                timeLabel.isHidden = false
                 
             }
             

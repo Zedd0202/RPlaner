@@ -26,7 +26,21 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
 
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var circularProgressView: KDCircularProgress!
-    
+//    func getCurrentDate() -> Date {
+//        
+//        var now:Date = Date()
+//        var calendar = Calendar.current
+//        let timezone = NSTimeZone.system
+//        calendar.timeZone = timezone
+//        //timezone을 사용해서 date의 components를 지정해서 가져옴.
+//        let anchorComponets = calendar.dateComponents([.day, .month, .year, .hour, .minute, .second], from: now)
+//        
+//        let getDateFromDateComponents = calendar.date(from: anchorComponets)
+//        if let getCurrentDate = getDateFromDateComponents {
+//            now = getCurrentDate
+//        }
+//        return now
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         completionButton.isHidden = true
@@ -40,7 +54,6 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
             timeLabel.isHidden = false
           
             //let currentIndex = doingTodo.index(ofAccessibilityElement: doingTodo)
-            
 
         }
        

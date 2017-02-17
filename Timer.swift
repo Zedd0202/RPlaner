@@ -13,7 +13,7 @@ protocol CountdownTimerDelegate {
     func countdownEnded() -> Void
 }
 
-class CountdownTimer {
+class CountdownTimer  {
     
     
     let timerLabel: UILabel
@@ -31,9 +31,10 @@ class CountdownTimer {
     
     var endTime: Int?
     var timer: Timer?
+    var startClickTime: Int
     var delegate: CountdownTimerDelegate!
     
-    init(timerLabel: UILabel,startingDay:Int,startingHour:Int, startingMin: Int, startingSec: Int) {
+    init(timerLabel: UILabel,startingDay: Int ,startingHour: Int, startingMin: Int, startingSec: Int, startClickTime : Int) {
         
         self.timerLabel = timerLabel
         self.startingDay = startingDay
@@ -45,13 +46,13 @@ class CountdownTimer {
         self.hourLeft = startingHour
         self.minLeft = startingMin
         self.secLeft = startingSec
+        self.startClickTime = startClickTime
         refreshTimerLabel()
     }
     
     func refreshTimerLabel() {
         
-        let endtime2 = endTime
-        let timer2 = timer
+       
         let dayString = dayLeft < 10 ? "0\(dayLeft)" : "\(dayLeft)"
         
         let hourString = hourLeft < 10 ? "0\(hourLeft)" : "\(hourLeft)"
@@ -117,7 +118,7 @@ class CountdownTimer {
     
     // MARK: - Timer Logic
     dynamic func updateTimer() {
-        var timeDiff = endTime! - Int(round(NSDate().timeIntervalSince1970))
+        var timeDiff = endTime! - (Int(round(NSDate().timeIntervalSince1970)) - startClickTime)
         hourLeft = timeDiff / (3600*startingDay)
         timeDiff = timeDiff % (3600)
         minLeft = timeDiff / 60

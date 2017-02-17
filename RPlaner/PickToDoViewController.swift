@@ -110,11 +110,11 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
                     pickRandomToDoButton.isHidden = true
                     completionButton.isHidden = false
                     
+                    var deadLine = Double((todoList.items?[randomIndex!].deadLineNumber)!)
+                    print(deadLine)
                     
-                    
-                    
-                    let time = getCurrentDate() + 3*86400
-                    
+                   let time = getCurrentDate() + (deadLine!*86400)
+//                    let time = getCurrentDate() + 
                     print(time)
                     if time > Date() {
                         startTimer(time)

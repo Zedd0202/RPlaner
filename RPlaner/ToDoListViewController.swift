@@ -11,14 +11,15 @@ import RealmSwift
 
 
 class ToDoListViewController: UITableViewController {
+    
+    
     let realm = try? Realm()
     var todoList = ToDoList()
     var todo: ToDo?
-    //var aa = Count()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
@@ -28,15 +29,8 @@ class ToDoListViewController: UITableViewController {
         self.todoList.items = realm?.objects(ToDo.self)
         
         self.title = "RPlaner"
-//        addButton?.target = self
-//        addButton?.action = #selector(ToDoListViewController.onClickAddButton(sender:))
-        
-        
-//    }
-//    func onClickAddButton(sender: UIBarButtonItem) {
-//        self.todo = nil
-//        self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
-//    }
+        self.navigationItem.backBarButtonItem?.tintColor = .white
+
     }
     @IBAction func addButtonTapped(_ sender: Any) {
         self.todo = nil
@@ -72,6 +66,7 @@ class ToDoListViewController: UITableViewController {
         self.todo = cell.todo
         self.performSegue(withIdentifier: "toDetailToDoViewController", sender: self)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toDetailToDoViewController") {
             let newToDoVC = segue.destination as! ToDoDetailViewController
@@ -84,8 +79,6 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
-            
-            
         }
         
         
@@ -101,7 +94,7 @@ class ToDoListViewController: UITableViewController {
             print(self.todoList.items?.count)
             //            self.deleteTableIndexPath = editActionsForRowAt as NSIndexPath?
             //            self.confirmDelete(planet: "tableToDelete")
-            
+            tableView.reloadData()
         }
         
         return [delete,edit]
@@ -141,7 +134,7 @@ class ToDoListViewController: UITableViewController {
     
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0{
+        if sender.selectedSegmentIndex == 1{
             tableView.beginUpdates()
 
             let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "planTitle", ascending: true)
@@ -149,7 +142,7 @@ class ToDoListViewController: UITableViewController {
             self.todoList.items = sortedStuff
             
             tableView.reloadData()
-//            tableView.endUpdates()
+            tableView.endUpdates()
 
             
            // print(sortedStuff?.first?.planTitle)
@@ -170,12 +163,12 @@ class ToDoListViewController: UITableViewController {
             //    }
             
             
-        } else if sender.selectedSegmentIndex == 1 {
+        } else if sender.selectedSegmentIndex == 0 {
             
             // 제목대신 날짜로 바꾸기
-            let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: true)
+            let sortedStuffs = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: true)
             
-            self.todoList.items = sortedStuff
+            self.todoList.items = sortedStuffs
             self.tableView.reloadData()
             
         }
@@ -192,6 +185,7 @@ class ToDoListViewController: UITableViewController {
             let indexPaths = NSIndexPath(row: indexPath.row, section: indexPath.section)
             
             tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
+            tableView.reloadData()
             tableView.endUpdates()
         }
     }

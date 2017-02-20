@@ -34,8 +34,11 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.todoTitleTextField?.layer.borderColor = UIColor.lightGray.cgColor
+        self.todoTitleTextField?.layer.borderWidth = 1.0
+
         self.todoMemo?.layer.borderWidth = 1.0
-        self.todoMemo?.layer.borderColor = UIColor.black.cgColor
+        self.todoMemo?.layer.borderColor = UIColor.lightGray.cgColor
         todoCompleteOptionTextField?.text = "동안"
         todoDaysTextField?.delegate = self
         todoTitleTextField?.delegate = self
@@ -99,7 +102,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             self.todoMemo?.text = todo?.memo
             state = .Update
         } else {
-            self.todoTitleTextField?.placeholder = "계획을 입력해주세요."
+            self.todoTitleTextField?.placeholder = "구체적인 계획을 입력해주세요."
             
             state = .Create
         }
@@ -161,20 +164,33 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     }
     
     
-    
     @IBAction func saveButtonTapped(_ sender: Any) {
+        var currentTime = Date()
         if isValidate() == false {
             return
         }
         if state == .Create {
-            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!, createdAt : currentTime)
         } else if state == .Update {
             //self.title = todoTitleTextField?.text
             ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
         }
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
-
     }
+    
+//    @IBAction func saveButtonTapped(_ sender: Any) {
+//        if isValidate() == false {
+//            return
+//        }
+//        if state == .Create {
+//            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+//        } else if state == .Update {
+//            //self.title = todoTitleTextField?.text
+//            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
+//        }
+//        self.performSegue(withIdentifier: "returnToDoList", sender: self)
+
+    //}
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2

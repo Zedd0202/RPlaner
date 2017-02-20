@@ -30,6 +30,10 @@ class ToDoDetailViewController: UIViewController {
         detailMemo.layer.borderWidth = 1.0
         detailMemo.layer.borderColor = UIColor.black.cgColor
         self.title = todo?.planTitle
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+      
+        self.navigationController?.navigationBar.topItem?.title = ""
+
     }
     
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -43,6 +47,7 @@ class ToDoDetailViewController: UIViewController {
         if (segue.identifier == "toNewToDoViewController") {
             let newToDoVC = segue.destination as! NewToDoCreateViewController
             newToDoVC.todo = self.todo
+            newToDoVC.title = self.todo?.planTitle
         }
     }
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

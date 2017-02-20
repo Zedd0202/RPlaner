@@ -13,39 +13,59 @@ import UserNotifications
 
 private let stopTimeKey = "stopTimeKey"
 
-class PickToDoViewController: UIViewController,CountdownTimerDelegate {
+class PickToDoViewController: UIViewController {
+    
     let realm = try? Realm()
     var currentTime = NSDate()
     var todoList = ToDoList()
     var todo: ToDo?
-    
-    private var stopTime: Date?
-
-    //var completeTodo = [ToDo]()
-    //var aa = Count()
-    //var count : Int = 0
     var startClickTime : Int = 0
     var endTime : Int = 0
-    //var timer: CountdownTimer!
-
     var randomIndex:Int?
     let userDefaults = UserDefaults.standard
-
+   
+    private var stopTime: Date?
+  
+    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var circularProgressView: KDCircularProgress!
+    
+    var currentCount =  0.0
+    var maxCount =  0.0
+    var timers : Timer?
+    func handle()
+    {
+        if maxCount <= currentCount{
+            print("tttttttttt")
+            circularProgressView.animate(toAngle: 0.0, duration: 1, completion: nil)
+            timers?.invalidate()
+            timers = nil
+            
+        }
+        else{
+            let newAngleValue = newAngle()
+            circularProgressView.animate(toAngle:Double(newAngleValue), duration: 1, completion: nil)
+        }
+    }
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+
+        
         completionButton.isHidden = true
         self.todoList.items = realm?.objects(ToDo.self)
         userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
-
+        
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
             displayTodoLabel.text = doingTodo.planTitle
             completionButton.isHidden = false
             pickRandomToDoButton.isHidden = true
             timeLabel.isHidden = false
-          //print(getCurrentDate())
-            //let currentIndex = doingTodo.index(ofAccessibilityElement: doingTodo)
+            
             
             registerForLocalNotifications()
             stopTime = UserDefaults.standard.object(forKey: stopTimeKey) as? Date
@@ -56,21 +76,19 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
                     notifyTimerCompleted()
                 }
             }
-
-
+            
+            
         }
-       
+            
         else{
             userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
             displayTodoLabel.text = displayTodoLabel.text
             //timeLabel.isHidden = true
-
+            
         }
-     
+        
     }
-    func countdownEnded() -> Void {
-        // Handle countdown finishing
-    }
+  
     
     private func registerForLocalNotifications() {
         if #available(iOS 10, *) {
@@ -81,30 +99,36 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
                     return
                 }
             }
-        } else {
+        }
+        else {
             let types: UIUserNotificationType = [.badge, .sound, .alert]
             let settings = UIUserNotificationSettings(types: types, categories: nil)
             UIApplication.shared.registerUserNotificationSettings(settings)
         }
     }
-
+    
     @IBOutlet weak var displayTodoLabel: UILabel!
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
+    
+    
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
         timeLabel.isHidden = false
         if (todoList.items?.count)! >  0
         {
+            
+            currentCount = 0.0
             while  true{
                 let ccount = realm?.objects(ToDo.self).filter("isComplete == true")
                 if ccount?.count == todoList.items?.count{
                     timeLabel.isHidden = true
-
+                    
                     displayTodoLabel.text = "모든 계획이 완료"
                     break;
                 }
                 self.randomIndex = Int(arc4random_uniform(UInt32((todoList.items?.count)!)))
                 if((todoList.items?[randomIndex!].isComplete)! == false){
+                    timeLabel.isHidden = false
                     displayTodoLabel.isHidden = false
                     displayTodoLabel.text = todoList.items?[randomIndex!].planTitle
                     pickRandomToDoButton.isHidden = true
@@ -113,21 +137,45 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
                     var deadLine = Double((todoList.items?[randomIndex!].deadLineNumber)!)
                     print(deadLine)
                     
-                   let time = getCurrentDate() + (deadLine!*86400)
-//                    let time = getCurrentDate() + 
+                    
+                   
+                    let time = getCurrentDate() + (deadLine!*86400)
+                    
+                    maxCount = deadLine!*86400
+                    //maxCount = 15.0
+                    userDefaults.set(maxCount, forKey: "maxCount")
+                    userDefaults.synchronize()
+
+                    if currentCount != maxCount {
+                        //currentCount += 1
+                        
+                        userDefaults.synchronize()
+                        let newAngleValue = newAngle()
+                        
+                        //timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handle(_:)), userInfo: nil, repeats: true)
+                        timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                            self.handle()
+                            //print("A")
+                        })
+                    }
+                    else{
+                        timers?.invalidate()
+                        timers = nil
+                    }
+
+
+                    
+                    
+                    //let time = getCurrentDate() + 5.0
+                   
                     print(time)
                     if time > Date() {
                         startTimer(time)
                     } else {
                         timeLabel.text = "timer date must be in future"
                     }
-
-//                    startClickTime = getCurrentDate()
-//                    print(getCurrentDate())//현재 클릭을 누른시간 저장.
-//                    endTime = Int(round(NSDate().timeIntervalSince1970)) + Int((todoList.items?[randomIndex!].deadLineNumber)!)!*86400
-//                    print(endTime)
-//                    timer.start()
-
+                    
+                  
                     let realm = try! Realm()
                     realm.beginWrite()
                     todoList.items?[randomIndex!].isDoing = true
@@ -143,11 +191,29 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
             
         }
         else{
+            
             displayTodoLabel.isHidden = false
             displayTodoLabel.text = "계획을 먼저 생성해 주세요ㅠㅠ"
+            timeLabel.isHidden = true
         }
     }
-    
+   
+    func newAngle() -> Int {
+        if currentCount >=  maxCount{
+            timers?.invalidate()
+            timers = nil
+            currentCount = 0
+            circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+            circularProgressView.animate(fromAngle:circularProgressView.angle, toAngle: 0, duration: 0.5, completion: nil)
+        }
+
+        currentCount += 1
+        userDefaults.set(currentCount, forKey: "currentCount")
+        userDefaults.synchronize()
+        
+        return Int(360 * (currentCount / maxCount))
+    }
+
     func getCurrentDate() -> Date {
         
         var now:Date = Date()
@@ -163,104 +229,100 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
         }
         return now
     }
-
+    
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
+        
         
         timeLabel.isHidden = true
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
-        completionButton.isHidden = true
-        pickRandomToDoButton.isHidden = false
-        timeLabel.isHidden = true
-        displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+            completionButton.isHidden = true
+            pickRandomToDoButton.isHidden = false
             timeLabel.isHidden = true
-    //    timer.reset()
-
-        
-        
-        let realm = try! Realm()
-        realm.beginWrite()
-        
-        //todoList.complete()
-        doingTodo.isComplete = true
-
-
-        doingTodo.isDoing = false
-//        todoList.items?[randomIndex!].isComplete = true
-//        
-//        
-//        todoList.items?[randomIndex!].isDoing = false
-
-
-//        count = count + 1//유저디폴트
-//        let userDefaults = UserDefaults.standard
-//        userDefaults.setValue(count, forKey: "count")
-//        userDefaults.synchronize()
-//        print(count)
-        try? realm.commitWrite()
-        
+            displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+            timeLabel.isHidden = true
+            currentCount = 0
+            circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
+            
+            
+            
+            let realm = try! Realm()
+            realm.beginWrite()
+            
+            //todoList.complete()
+            doingTodo.isComplete = true
+            
+            
+            doingTodo.isDoing = false
+            try? realm.commitWrite()
+            
+        }
     }
-}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         timeLabel.isHidden = true
-//        timer = CountdownTimer(timerLabel: timeLabel, startingDay : 2, startingHour :0,startingMin: 0, startingSec: 0,startClickTime : startClickTime)
-//        timer.delegate = self
         
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first {
             
+            
             if doingTodo.isComplete == false{
                 self.displayTodoLabel.text = doingTodo.planTitle
-                //print(doingTodo.planTitle)
                 pickRandomToDoButton.isHidden = true
                 completionButton.isHidden = false
                 timeLabel.isHidden = false
-               
+                currentCount = userDefaults.double(forKey: "currentCount")
+                userDefaults.synchronize()
+                maxCount = userDefaults.double(forKey: "maxCount")
+                userDefaults.synchronize()
+                
+                if currentCount != 0{
+                    timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                        self.handle()
+                    })
+                }
+                if currentCount >=  maxCount{
+                    timers?.invalidate()
+                    timers = nil
+                    currentCount = 0
+                    circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+                }
+
+                
+                
             }
             
             
         }
         else{
             
-            displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
-            
-            if displayTodoLabel.text == "다음 계획을 생성하려면 클릭버튼을 눌러주세요"{
-               displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
-                print("aa")
-                userDefaults.synchronize()
-                return
-            }
-            if displayTodoLabel.text == "모든 계획이 완료"{
-                //self.displayTodoLabel.text = "모든 계획이 완료"
-                displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
-                userDefaults.synchronize()
-                return
-            }
-            else{
-            self.displayTodoLabel.text = "삭제된 계획입니다"
-            pickRandomToDoButton.isHidden = false
-            completionButton.isHidden = true
-            
+//            displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+//            
+//            if displayTodoLabel.text == "삭제된 계획입니다"{
+//                displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+//                displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+//                
+//                userDefaults.synchronize()
+//                return
+//            }
+//            
+//            if displayTodoLabel.text == "삭제된 계획입니다"{
+//                self.displayTodoLabel.text = "모든 계획이 완료"
+//                displayTodoLabel.text = userDefaults.string(forKey: "displayTodoLabel")
+//                userDefaults.synchronize()
+//                return
+//            }
+//            else{
+                self.displayTodoLabel.text = "삭제된 계획입니다"
+                pickRandomToDoButton.isHidden = false
+                completionButton.isHidden = true
+                
             }
             
         }
-        // let memes = realm.objects()
-//                userDefaults.setValue(displayTodoLabel.text, forKey: "displayTodoLabel")
-//                userDefaults.synchronize()
         
-        
-    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
     private var timer: Timer?
     
     private func startTimer(_ stopTime: Date, includeNotification: Bool = true) {
@@ -279,8 +341,8 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
         
         if #available(iOS 10, *) {
             let content = UNMutableNotificationContent()
-            content.title = "Timer expired"
-            content.body = "Whoo, hoo!"
+            content.title = "계획기한이 만료되었어요."
+            content.body = "다음 계획을 진행해보세요!"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: stopTime.timeIntervalSinceNow, repeats: false)
             let notification = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(notification)
@@ -300,19 +362,12 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
     private let dateComponentsFormatter: DateComponentsFormatter = {
         let _formatter = DateComponentsFormatter()
         _formatter.allowedUnits = [.day, .hour, .minute, .second]
-        _formatter.unitsStyle = .positional
+        _formatter.unitsStyle = .abbreviated
         _formatter.zeroFormattingBehavior = .pad
         return _formatter
     }()
     
-    // I'm going to use `DateComponentsFormatter` to update the
-    // label. Update it any way you want, but the key is that
-    // we're just using the scheduled stop time and the current
-    // time, but we're not counting anything. If you don't want to
-    // use `NSDateComponentsFormatter`, I'd suggest considering
-    // `NSCalendar` method `components:fromDate:toDate:options:` to
-    // get the number of hours, minutes, seconds, etc. between two
-    // dates.
+  
     
     func handleTimer(_ timer: Timer) {
         let now = Date()
@@ -328,5 +383,5 @@ class PickToDoViewController: UIViewController,CountdownTimerDelegate {
     private func notifyTimerCompleted() {
         timeLabel.text = "Timer done!"
     }
-
+    
 }

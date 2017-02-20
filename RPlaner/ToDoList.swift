@@ -44,7 +44,7 @@ class ToDoList {
         }
     }
     
-    func create(name: String, deadline: String, completionOption : String, memoText: String) {
+    func create(name: String, deadline: String, completionOption : String, memoText: String,createdAt : Date) {
         let toDo = ToDo()
         
         toDo.planTitle = name
@@ -54,7 +54,7 @@ class ToDoList {
         toDo.isComplete = false
         //toDo.createdAt = createdTime as NSDate
         //count = count + 1
-        //toDo.createdAt = NSDate()
+        toDo.createdAt = Date()
         
         do {
             let realm = try Realm()

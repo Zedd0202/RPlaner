@@ -29,6 +29,7 @@ class ToDoListViewController: UITableViewController {
         self.todoList.items = realm?.objects(ToDo.self)
         
         self.title = "RPlaner"
+        self.editButtonItem.tintColor = .white
         self.navigationItem.backBarButtonItem?.tintColor = .white
 
     }

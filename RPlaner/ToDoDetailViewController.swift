@@ -28,7 +28,7 @@ class ToDoDetailViewController: UIViewController {
         detailToDoTitle.text = todo?.planTitle
         detailMemo.text = todo?.memo
         detailMemo.layer.borderWidth = 1.0
-        detailMemo.layer.borderColor = UIColor.black.cgColor
+        detailMemo.layer.borderColor = UIColor.lightGray.cgColor
         self.title = todo?.planTitle
         self.navigationController?.navigationBar.tintColor = UIColor.white
       

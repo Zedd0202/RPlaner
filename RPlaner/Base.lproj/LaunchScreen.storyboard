@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="그림1" translatesAutoresizingMaskIntoConstraints="NO" id="gQk-gf-sYY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RPlaner" translatesAutoresizingMaskIntoConstraints="NO" id="gQk-gf-sYY">
                                 <rect key="frame" x="34" y="71" width="307" height="525"/>
                             </imageView>
                         </subviews>
@@ -42,6 +42,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="그림1" width="152" height="255"/>
+        <image name="RPlaner" width="273" height="131"/>
     </resources>
 </document>

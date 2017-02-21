@@ -37,8 +37,13 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         self.todoTitleTextField?.layer.borderColor = UIColor.lightGray.cgColor
         self.todoTitleTextField?.layer.borderWidth = 1.0
 
-        self.todoMemo?.layer.borderWidth = 1.0
-        self.todoMemo?.layer.borderColor = UIColor.lightGray.cgColor
+//        self.todoMemo?.layer.borderWidth = 1.0
+//        self.todoMemo?.layer.borderColor = UIColor.lightGray.cgColor
+        self.todoMemo?.layer.cornerRadius = 10;
+       
+        self.todoMemo?.layer.masksToBounds = true;
+        self.todoTitleTextField?.layer.cornerRadius = 10
+        self.todoTitleTextField?.layer.masksToBounds = true
         todoCompleteOptionTextField?.text = "동안"
         todoDaysTextField?.delegate = self
         todoTitleTextField?.delegate = self
@@ -246,7 +251,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         //키보드 노티 구독
         
     }
-    
+   
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
@@ -261,16 +266,16 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         unsubscribeFromKeyboardNotifications()
         
     }
-    
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        textField.resignFirstResponder()
-        return true
+   
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+//        textField.resignFirstResponder()
+//       return true
+//    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
     }
-    
-    
     func keyboardWillShow(_ notification:Notification) {
+        
         if (todoMemo?.isFirstResponder)!{
             view.frame.origin.y = 0 - getKeyboardHeight(notification)
         }

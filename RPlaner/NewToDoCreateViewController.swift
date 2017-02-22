@@ -75,7 +75,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         toolBar.sizeToFit()
         
-        self.todoTitleTextField?.textColor = UIColor.white
+        //self.todoTitleTextField?.textColor = UIColor.white
         // vself.todoTitleTextField?.placeholder.
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewToDoCreateViewController.donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
@@ -116,6 +116,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             
             state = .Create
         }
+        self.navigationItem.title = state.rawValue
+
         
         
         //        let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))

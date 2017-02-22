@@ -22,7 +22,7 @@ class ToDoListViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         //self.navigationItem.leftBarButtonItem = self.editButtonItem
-        self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
+        //self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
         
         let realm = try? Realm()
 
@@ -78,15 +78,17 @@ class ToDoListViewController: UITableViewController {
         self.todo = cell.todo
         self.performSegue(withIdentifier: "toDetailToDoViewController", sender: self)
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toDetailToDoViewController") {
             let newToDoVC = segue.destination as! ToDoDetailViewController
             newToDoVC.todo = self.todo
         }
         if (segue.identifier == "toNewToDoViewController") {
-            let newToDoVC = segue.destination as! NewToDoCreateViewController
-            if let todo = sender as? ToDo {
+            if let navi = segue.destination as? UINavigationController, let newToDoVC = navi.viewControllers.first as? NewToDoCreateViewController, let todo = sender as? ToDo {
+            
                 newToDoVC.todo = todo
             }
         }
@@ -101,7 +103,10 @@ class ToDoListViewController: UITableViewController {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             
             print("a")
-            self.performSegue(withIdentifier: "toNewToDoViewController", sender: self.todoList.items?[editActionsForRowAt.row])
+            
+            if let cell: ToDoListViewCell = tableView.cellForRow(at: editActionsForRowAt) as? ToDoListViewCell {
+            self.performSegue(withIdentifier: "toNewToDoViewController", sender: cell.todo)
+            }
 
         }
         

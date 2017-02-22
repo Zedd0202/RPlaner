@@ -20,6 +20,7 @@ class ToDoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.tabBarControlle
         editButton.target = self
         editButton.action = #selector(ToDoDetailViewController.onClickEditButton(sender:))
         // Do any additional setup after loading the view.
@@ -30,7 +31,7 @@ class ToDoDetailViewController: UIViewController {
         self.detailMemo.layer.cornerRadius = 10
         self.detailMemo.layer.masksToBounds = true
         self.title = todo?.planTitle
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.black
       
         self.navigationController?.navigationBar.topItem?.title = ""
 
@@ -45,11 +46,20 @@ class ToDoDetailViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toNewToDoViewController") {
-            let newToDoVC = segue.destination as! NewToDoCreateViewController
-            newToDoVC.todo = self.todo
-            newToDoVC.title = self.todo?.planTitle
+            if let navi = segue.destination as? UINavigationController, let newToDoVC = navi.viewControllers.first as? NewToDoCreateViewController {
+                newToDoVC.todo = self.todo
+                newToDoVC.title = self.todo?.planTitle
+            }
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+         self.tabBarController?.tabBar.isHidden = true
+    }
+   
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        // Get the new view controller using segue.destinationViewController.
 //        // Pass the selected object to the new view controller.

@@ -36,9 +36,7 @@ class PickToDoViewController: UIViewController {
   
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var circularProgressView: KDCircularProgress!
-    
-   
-    func handle()
+       func handle()
     {
         if maxCount <= currentCount{
             print("tttttttttt")
@@ -48,6 +46,7 @@ class PickToDoViewController: UIViewController {
             completionButton.isHidden = true
             pickRandomToDoButton.isHidden = false
             displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+            return
             
         }
         else{
@@ -56,12 +55,24 @@ class PickToDoViewController: UIViewController {
         }
     }
     
-    
+//    @IBAction func tapAnywhereAction(_ sender: Any) {
+//        if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
+//          self.performSegue(withIdentifier: "showDetailView", sender: self)
+//        }
+//    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if (segue.identifier == "showDetailView") {
+//            let newToDoVC = segue.destination as! ToDoDetailViewController
+//            newToDoVC.todo = self.todo
+//        }
+//    }
+   
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    
+        //timeLabel.attributedText = UIFont(name: "BMHANNA_11yrs_ttf", size: 35)
         completionButton.isHidden = true
         self.todoList.items = realm?.objects(ToDo.self)
         userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
@@ -154,16 +165,16 @@ class PickToDoViewController: UIViewController {
                     userDefaults.set(maxCount, forKey: "maxCount")
                     userDefaults.synchronize()
                     
-                    if currentCount != maxCount {
+                    if currentCount <= maxCount {
                         //currentCount += 1
                         
                         userDefaults.synchronize()
                         let newAngleValue = newAngle()
                         
                         //timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handle(_:)), userInfo: nil, repeats: true)
-                        timers = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (timer) in
+                        timers = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (timers) in
                             self.handle()
-                            //print("A")
+                            print("A")
                         })
                     }
                     else{
@@ -292,16 +303,17 @@ class PickToDoViewController: UIViewController {
                 maxCount = userDefaults.double(forKey: "maxCount")
                 userDefaults.synchronize()
                 
-                if currentCount != 0{
-                    timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-                        self.handle()
-                    })
-                }
+               
                 if currentCount >=  maxCount{
                     timers?.invalidate()
                     timers = nil
                     currentCount = 0
                     circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+                }
+                else{
+//                    timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timers) in
+//                        self.handle()
+//                    })
                 }
                 
                 

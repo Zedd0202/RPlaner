@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141A26DB1E5D6D630081BDD4 /* BMHANNA_11yrs_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */; };
+		141A26DD1E5D6FD90081BDD4 /* BMHANNA_11yrs_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */; };
 		1427481E1E556F7800C192B8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1427481D1E556F7800C192B8 /* Timer.swift */; };
 		143A40AA1E4DFD160026A70D /* PickToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A40A91E4DFD160026A70D /* PickToDoViewController.swift */; };
 		144CD1021E4DC57E00479D13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CD1011E4DC57E00479D13 /* AppDelegate.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMHANNA_11yrs_otf.otf; sourceTree = "<group>"; };
+		141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMHANNA_11yrs_ttf.ttf; sourceTree = "<group>"; };
 		1427481D1E556F7800C192B8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		143A40A91E4DFD160026A70D /* PickToDoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickToDoViewController.swift; path = RPlaner/PickToDoViewController.swift; sourceTree = "<group>"; };
 		144CD0FE1E4DC57E00479D13 /* RPlaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPlaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +73,8 @@
 			isa = PBXGroup;
 			children = (
 				144CD1051E4DC57E00479D13 /* Main.storyboard */,
+				141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */,
+				141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */,
 				144CD10A1E4DC57E00479D13 /* LaunchScreen.storyboard */,
 				144CD1081E4DC57E00479D13 /* Assets.xcassets */,
 			);
@@ -207,6 +213,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141A26DD1E5D6FD90081BDD4 /* BMHANNA_11yrs_ttf.ttf in Resources */,
+				141A26DB1E5D6D630081BDD4 /* BMHANNA_11yrs_otf.otf in Resources */,
 				144CD10C1E4DC57E00479D13 /* LaunchScreen.storyboard in Resources */,
 				144CD1091E4DC57E00479D13 /* Assets.xcassets in Resources */,
 				144CD1071E4DC57E00479D13 /* Main.storyboard in Resources */,

@@ -1,70 +1,59 @@
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
+@import 'libs/skel';
 
 /*
-	Overflow by HTML5 UP
+	Hyperspace by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-/* Basic */
+/* Type */
 
-	body {
-		background-image: url('../../images/bg.jpg');
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: auto;
-		background-attachment: scroll;
-		-ms-behavior: url('assets/js/ie/backgroundsize.min.htc');
-	}
-
-/* Section/Article */
-
-	section > .last-child,
-	article > .last-child,
-	section.last-child,
-	article.last-child {
-		margin-bottom: 0;
+	body, input, select, textarea {
+		color: _palette(fg-bold);
 	}
 
 /* Button */
 
-	input[type="button"],
 	input[type="submit"],
 	input[type="reset"],
+	input[type="button"],
 	button,
 	.button {
 		position: relative;
-		-ms-behavior: url('assets/js/ie/PIE.htc');
 
-		&.style2 {
-			&:hover {
-				color: #35b88f !important;
-			}
-		}
-
-		&.style3 {
-			background: #fefefe;
-			border: solid 1px #dad9d9;
+		&:after {
+			display: none;
 		}
 	}
 
-/* Footer */
+/* Features */
 
-	#footer {
-		.icons {
-			position: relative;
-			-ms-behavior: url('assets/js/ie/PIE.htc');
-		}
+	.features {
+		border: solid 1px;
 	}
 
-/* Header */
+/* Form */
 
-	#header {
-		header {
-			p {
-				border-top: solid 1px #888;
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	input[type="tel"],
+	select,
+	textarea {
+		background: transparent;
+		border: solid 1px;
+	}
+
+/* Split */
+
+	.split {
+		&.style1 {
+			> :first-child {
+				padding-right: 2em;
+				width: 70%;
 			}
 		}
 	}

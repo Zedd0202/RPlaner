@@ -16,7 +16,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             case completeOption = 1
         }
         
-        static let completeOption = ["동안", "내내"]
+        static let completeOption = ["동안", "이내"]
         static let pickOption = ["1", "2", "3", "4", "5", "6", "7"]
     }
     
@@ -34,16 +34,18 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.todoTitleTextField?.layer.borderColor = UIColor.lightGray.cgColor
-        self.todoTitleTextField?.layer.borderWidth = 1.0
+        //self.todoTitleTextField?.layer.borderColor = UIColor.lightGray.cgColor
+        //self.todoTitleTextField?.layer.borderWidth = 1.0
 
 //        self.todoMemo?.layer.borderWidth = 1.0
 //        self.todoMemo?.layer.borderColor = UIColor.lightGray.cgColor
         self.todoMemo?.layer.cornerRadius = 10;
-       
+        //UINavigationBar.appearance().shadowImage = UIImage()
+        //UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         self.todoMemo?.layer.masksToBounds = true;
         self.todoTitleTextField?.layer.cornerRadius = 10
         self.todoTitleTextField?.layer.masksToBounds = true
+        
         todoCompleteOptionTextField?.text = "동안"
         todoDaysTextField?.delegate = self
         todoTitleTextField?.delegate = self
@@ -73,7 +75,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         toolBar.sizeToFit()
         
-        
+        self.todoTitleTextField?.textColor = UIColor.white
+        // vself.todoTitleTextField?.placeholder.
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewToDoCreateViewController.donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         
@@ -108,12 +111,14 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             state = .Update
         } else {
             self.todoTitleTextField?.placeholder = "구체적인 계획을 입력해주세요."
+            self.todoTitleTextField?.attributedPlaceholder = NSAttributedString(string: "구체적인 계획을 입력해주세요.",attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+        
             
             state = .Create
         }
-        self.title = state.rawValue
         
-//        let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
+        
+        //        let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
 //        self.navigationItem.rightBarButtonItem = saveButton
 //        
 //                let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))

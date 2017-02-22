@@ -21,7 +21,7 @@ class ToDoListViewController: UITableViewController {
         
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        //self.navigationItem.leftBarButtonItem = self.editButtonItem
         self.view.backgroundColor = UIColor(red: CGFloat(238 / 255.0), green: CGFloat(238 / 255.0), blue: CGFloat(238 / 255.0), alpha: 1)
         
         let realm = try? Realm()
@@ -29,7 +29,8 @@ class ToDoListViewController: UITableViewController {
         self.todoList.items = realm?.objects(ToDo.self)
         
         self.title = "RPlaner"
-        self.editButtonItem.tintColor = .white
+        //self.editButtonItem.tintColor = .white
+        //self.editButtonItem.isEnabled = true
         self.navigationItem.backBarButtonItem?.tintColor = .white
 
     }
@@ -57,11 +58,21 @@ class ToDoListViewController: UITableViewController {
         
         
     }
-    
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if  indexPath.row % 2 == 0{
+////            cell.backgroundColor = UIColor(red: 38/255, green: 49/255, blue: 43/255, alpha: 1.0)
+//              cell.backgroundColor = UIColor(red:255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+//            
+//
+//        }
+//        else{
+//            cell.backgroundColor = UIColor(red: 38/255, green: 49/255, blue: 43/255, alpha: 1.0)
+//        }
+//    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 80
     }
-    
+  
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ToDoListViewCell
         self.todo = cell.todo
@@ -73,6 +84,13 @@ class ToDoListViewController: UITableViewController {
             let newToDoVC = segue.destination as! ToDoDetailViewController
             newToDoVC.todo = self.todo
         }
+        if (segue.identifier == "toNewToDoViewController") {
+            let newToDoVC = segue.destination as! NewToDoCreateViewController
+            if let todo = sender as? ToDo {
+                newToDoVC.todo = todo
+            }
+        }
+        
     }
     
     var deleteTableIndexPath: NSIndexPath? = nil
@@ -82,6 +100,9 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             
+            print("a")
+            self.performSegue(withIdentifier: "toNewToDoViewController", sender: self.todoList.items?[editActionsForRowAt.row])
+
         }
         
         
@@ -169,7 +190,7 @@ class ToDoListViewController: UITableViewController {
         } else if sender.selectedSegmentIndex == 0 {
             
             // 제목대신 날짜로 바꾸기
-            let sortedStuffs = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: true)
+            let sortedStuffs = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: false)
             
             self.todoList.items = sortedStuffs
             self.tableView.reloadData()
@@ -180,19 +201,19 @@ class ToDoListViewController: UITableViewController {
     
     
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.beginUpdates()
-            todoList.delete(index: indexPath.row)
-            
-            let indexPaths = NSIndexPath(row: indexPath.row, section: indexPath.section)
-            
-            tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
-            tableView.reloadData()
-            tableView.endUpdates()
-        }
-    }
-    
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            tableView.beginUpdates()
+//            todoList.delete(index: indexPath.row)
+//            
+//            let indexPaths = NSIndexPath(row: indexPath.row, section: indexPath.section)
+//            
+//            tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
+//            tableView.reloadData()
+//            tableView.endUpdates()
+//        }
+//    }
+//    
    
     
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {

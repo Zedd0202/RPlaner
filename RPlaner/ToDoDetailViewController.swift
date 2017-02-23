@@ -34,7 +34,10 @@ class ToDoDetailViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.black
       
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.detailToDoTitle.layer.cornerRadius = 10
+        self.detailToDoTitle.layer.masksToBounds = true
 
+        
     }
     
     @IBOutlet weak var editButton: UIBarButtonItem!

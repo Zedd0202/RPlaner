@@ -73,6 +73,7 @@ class PickToDoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = false
+        
 
        // self.todoTitleTextField?.layer.cornerRadius = 10
        // self.todoTitleTextField?.layer.masksToBounds = true
@@ -174,7 +175,8 @@ class PickToDoViewController: UIViewController {
                     
                     
                     let time = getCurrentDate() + (deadLine!*86400)
-                    //currentCount = Date().timeIntervalSince1970
+//                    UserDefaults.standard.set(currentTime, forKey: "currentTime")
+//                    self.currentTime = currentTime
                     
                     //maxCount = deadLine!*86400
                     maxCount = 10.0
@@ -269,34 +271,80 @@ class PickToDoViewController: UIViewController {
     
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
         
-        currentCount = 0
-        circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
-        timers?.invalidate()
-        timers = nil
-        timeLabel.isHidden = true
+//        currentCount = 0
+//        circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
+//        timers?.invalidate()
+//        timers = nil
+//        timeLabel.isHidden = true
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
-            completionButton.isHidden = true
-            pickRandomToDoButton.isHidden = false
-            timeLabel.isHidden = true
-            displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
-            timeLabel.isHidden = true
-            userDefaults.set(displayTodoLabel.text, forKey: "다음 계획을 생성하려면 클릭버튼을 눌러주세요")
-            userDefaults.synchronize()
+            
+            let alertController = UIAlertController(
+                title: "\(doingTodo.planTitle!)을(를) 정말로 다 끝내셨나요?",
+                message: "끝내셨다면 완료버튼을 눌러주세요.",
+                preferredStyle: UIAlertControllerStyle.alert
+            )
+            
+            let cancelAction = UIAlertAction(
+                title: "취소",
+                style: UIAlertActionStyle.destructive) { (action) in
+                    
+            }
+            
+            let confirmAction = UIAlertAction(
+            title: "완료", style: UIAlertActionStyle.default) { (action) in
+                //self.currentCount = 0
+                self.circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
+                self.timers?.invalidate()
+                self.timers = nil
+                self.timeLabel.isHidden = true
+                
+                self.completionButton.isHidden = true
+                self.pickRandomToDoButton.isHidden = false
+                self.timeLabel.isHidden = true
+                self.displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+                self.timeLabel.isHidden = true
+                self.userDefaults.set(self.displayTodoLabel.text, forKey: "다음 계획을 생성하려면 클릭버튼을 눌러주세요")
+                self.userDefaults.synchronize()
+                let realm = try! Realm()
+                realm.beginWrite()
+                
+                //todoList.complete()
+                doingTodo.isComplete = true
+                
+                
+                doingTodo.isDoing = false
+                try? realm.commitWrite()
+
+            }
+            
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+            
+//            completionButton.isHidden = true
+//            pickRandomToDoButton.isHidden = false
+//            timeLabel.isHidden = true
+//            displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
+//            timeLabel.isHidden = true
+//            userDefaults.set(displayTodoLabel.text, forKey: "다음 계획을 생성하려면 클릭버튼을 눌러주세요")
+//            userDefaults.synchronize()
             
            // currentCount = 0
            // circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
             
             
             
-            let realm = try! Realm()
-            realm.beginWrite()
-            
-            //todoList.complete()
-            doingTodo.isComplete = true
-            
-            
-            doingTodo.isDoing = false
-            try? realm.commitWrite()
+//            let realm = try! Realm()
+//            realm.beginWrite()
+//            
+//            //todoList.complete()
+//            doingTodo.isComplete = true
+//            
+//            
+//            doingTodo.isDoing = false
+//            try? realm.commitWrite()
             
         }
     }

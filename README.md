@@ -25,6 +25,7 @@
 **스크린샷**
 ---
 
+![CreatePlan](./image/CreatePlan.jpeg)
 
 
 

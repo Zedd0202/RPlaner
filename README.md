@@ -27,6 +27,35 @@
 
 ![CreatePlan](./image/CreatePlan.jpeg)
 
+간단하게 계획과 데드라인을 정할 수 있으며, 메모를 남길 수 있습니다.
+
+![DetailPlan](./image/DetailPlan.jpeg)
+
+메모는 URL링크를 인식하며 DetailView에서 바로 웹페이지로 갈 수 있습니다. 
+
+![Random](./image/Random.jpeg)
+
+
+
+![PickRandomPlan](./image/PickRandomPlan.jpeg)
+
+
+클릭버튼을 누르면 랜덤한 계획이 생성되며 곧바로 카운트다운이 시작됩니다.
+
+![check](./image/check.jpeg)
+
+카운트다운이 끝나기전에 계획을 완료했다면, 완료버튼을 눌러 계획을 완료할 수 있습니다. 
+
+![notificationPermission](./image/notificationPermission.jpeg)
+
+앱을 시작하면, 알림에 대한 Permission허가를 요청합니다.
+허용을 하게되면,
+
+![notification](./image/notification.jpeg)
+
+
+카운트다운이 끝났을 시 알림이 오게 됩니다.
+
 
 
 **구현**

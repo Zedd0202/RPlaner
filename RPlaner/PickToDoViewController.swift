@@ -74,6 +74,7 @@ class PickToDoViewController: UIViewController {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = false
         
+        registerForLocalNotifications()
 
        // self.todoTitleTextField?.layer.cornerRadius = 10
        // self.todoTitleTextField?.layer.masksToBounds = true
@@ -101,7 +102,7 @@ class PickToDoViewController: UIViewController {
             timeLabel.isHidden = false
             
             
-            registerForLocalNotifications()
+           // registerForLocalNotifications()
             stopTime = UserDefaults.standard.object(forKey: stopTimeKey) as? Date
             if let time = stopTime {
                 if time > Date() {
@@ -172,9 +173,11 @@ class PickToDoViewController: UIViewController {
                     var deadLine = Double((todoList.items?[randomIndex!].deadLineNumber)!)
                     print(deadLine)
                     
+                    let time = getCurrentDate() + 30.0
+                    
+                   // let time = getCurrentDate() + (deadLine!*86400)
                     
                     
-                    let time = getCurrentDate() + (deadLine!*86400)
 //                    UserDefaults.standard.set(currentTime, forKey: "currentTime")
 //                    self.currentTime = currentTime
                     

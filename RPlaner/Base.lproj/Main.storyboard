@@ -249,7 +249,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsu-VL-rgl">
-                                <rect key="frame" x="179" y="139" width="35" height="30"/>
+                                <rect key="frame" x="179" y="95" width="35" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="XLG-2d-Bwp"/>
                                     <constraint firstAttribute="width" constant="35" id="dl4-Fu-GOo"/>
@@ -259,14 +259,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-0M-8gN">
-                                <rect key="frame" x="12" y="306" width="351" height="285"/>
+                                <rect key="frame" x="12" y="262" width="351" height="378"/>
                                 <color key="backgroundColor" red="0.82352941180000006" green="0.84313725490000002" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" lookupSuggestion="YES"/>
+                                <color key="tintColor" red="0.012459970817914544" green="0.1082013725587225" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES" calendarEvent="YES"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="go1-LY-bVd">
-                                <rect key="frame" x="16" y="220" width="343" height="49"/>
+                                <rect key="frame" x="16" y="176" width="343" height="49"/>
                                 <color key="backgroundColor" red="0.82352941180000006" green="0.84313725490000002" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="eau-YJ-lsx"/>
@@ -276,16 +277,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9H-wT-Oxc">
-                                <rect key="frame" x="12" y="135" width="141" height="39"/>
+                                <rect key="frame" x="12" y="91" width="141" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="141" id="h8g-ef-EPT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TmonMonsoriBlack" family="TmonMonsori" pointSize="25"/>
-                                <color key="textColor" red="0.1137254902" green="0.12941176469999999" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.93725490196078431" green="0.28235294117647058" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vho-uN-UUf">
-                                <rect key="frame" x="222" y="139" width="153" height="32"/>
+                                <rect key="frame" x="222" y="95" width="153" height="32"/>
                                 <fontDescription key="fontDescription" name="TmonMonsoriBlack" family="TmonMonsori" pointSize="25"/>
                                 <color key="textColor" red="0.1137254902" green="0.12941176469999999" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -355,7 +356,7 @@
                                 </constraints>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPT-TT-fRU">
                                 <rect key="frame" x="0.0" y="612" width="375" height="55"/>
@@ -521,7 +522,7 @@
         <image name="temporal-data-storage" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZHs-4h-fzh"/>
+        <segue reference="Xrl-qy-X3j"/>
         <segue reference="0Bk-uX-DqP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

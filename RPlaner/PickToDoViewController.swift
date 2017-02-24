@@ -179,7 +179,7 @@ class PickToDoViewController: UIViewController {
 //                    self.currentTime = currentTime
                     
                     //maxCount = deadLine!*86400
-                    maxCount = 10.0
+                    maxCount = 30.0
                     userDefaults.set(maxCount, forKey: "maxCount")
                     userDefaults.synchronize()
                     
@@ -375,9 +375,9 @@ class PickToDoViewController: UIViewController {
                     circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
                 }
                 else{
-//                    timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timers) in
-//                        self.handle()
-//                    })
+                    timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timers) in
+                        self.handle()
+                    })
                 }
                 
                 

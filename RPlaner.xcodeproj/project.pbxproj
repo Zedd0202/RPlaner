@@ -62,6 +62,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140D22111E613A0A00BEFD39 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */,
+				141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */,
+				141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
 		144967E91E52F4B400F9542C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,9 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				144CD1051E4DC57E00479D13 /* Main.storyboard */,
-				141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */,
-				141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */,
-				141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */,
 				144CD10A1E4DC57E00479D13 /* LaunchScreen.storyboard */,
 				144CD1081E4DC57E00479D13 /* Assets.xcassets */,
 			);
@@ -106,6 +113,7 @@
 		144CD0F51E4DC57E00479D13 = {
 			isa = PBXGroup;
 			children = (
+				140D22111E613A0A00BEFD39 /* Font */,
 				1427481D1E556F7800C192B8 /* Timer.swift */,
 				1466DB351E54196B0036652A /* KDCircularProgress.swift */,
 				144967EA1E52F4BF00F9542C /* View */,

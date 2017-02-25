@@ -52,8 +52,6 @@ class ToDoList {
         toDo.TimeOfCompletion = completionOption
         toDo.memo = memoText
         toDo.isComplete = false
-        //toDo.createdAt = createdTime as NSDate
-        //count = count + 1
         toDo.createdAt = Date()
         
         do {
@@ -74,7 +72,7 @@ class ToDoList {
                 todo?.deadLineNumber = deadline
                 todo?.TimeOfCompletion = completionOption
                 todo?.memo = memoText
-               // todo?.isComplete = isCompleted
+               
             }
         } catch {
             print("update error")

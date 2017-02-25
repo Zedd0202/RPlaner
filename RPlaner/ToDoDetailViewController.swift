@@ -63,33 +63,5 @@ class ToDoDetailViewController: UIViewController {
          self.tabBarController?.tabBar.isHidden = true
     }
    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//        
-//        
-//        if segue.identifier == "toNewToDoViewController"  {
-//            
-//            if let navController = segue.destination as? UINavigationController {
-//                
-//                if let chidVC = navController.topViewController as? NewToDoCreateViewController {
-//                    chidVC.todo = self.todo
-//                    
-//                }
-//                
-//            }
-//            
-//        }
-//        
-//    }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

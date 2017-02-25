@@ -34,14 +34,8 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.todoTitleTextField?.layer.borderColor = UIColor.lightGray.cgColor
-        //self.todoTitleTextField?.layer.borderWidth = 1.0
-
-//        self.todoMemo?.layer.borderWidth = 1.0
-//        self.todoMemo?.layer.borderColor = UIColor.lightGray.cgColor
         self.todoMemo?.layer.cornerRadius = 10;
-        //UINavigationBar.appearance().shadowImage = UIImage()
-        //UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+    
         self.todoMemo?.layer.masksToBounds = true;
         self.todoTitleTextField?.layer.cornerRadius = 10
         self.todoTitleTextField?.layer.masksToBounds = true
@@ -75,9 +69,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
         toolBar.sizeToFit()
         
-        //self.todoTitleTextField?.textColor = UIColor.white
-        // vself.todoTitleTextField?.placeholder.
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewToDoCreateViewController.donePicker))
+               let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(NewToDoCreateViewController.donePicker))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         
         
@@ -89,7 +81,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         todoCompleteOptionTextField?.inputAccessoryView = toolBar
         
         
-        //pickerView.selectRow(7, inComponent: 0, animated: true)
+       
         
         
         
@@ -120,31 +112,12 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
 
         
         
-        //        let saveButton = UIBarButtonItem(title: "save", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickSaveButton(sender:)))
-//        self.navigationItem.rightBarButtonItem = saveButton
-//        
-//                let cancelButton = UIBarButtonItem(title: "cancel", style: .plain, target: self, action: #selector(NewToDoCreateViewController.onClickCancelButton(sender:)))
-//                self.navigationItem.leftBarButtonItem = cancelButton
-        // Do any additional setup after loading the view.
     }
     
     
-//    func onClickSaveButton(sender: UIBarButtonItem) {
-//        if isValidate() == false {
-//            return
-//        }
-//        if state == .Create {
-//            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
-//        } else if state == .Update {
-//            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
-//        }
-//        self.performSegue(withIdentifier: "returnToDoList", sender: self)
-//    }
-    
         func onClickCancelButton(sender: UIBarButtonItem) {
             dismiss(animated: true, completion: nil)
-//            _ = self.navigationController?.popViewController(animated: true)
-    
+
         }
     
     private func isValidate() -> Bool {
@@ -190,19 +163,6 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
     }
     
-//    @IBAction func saveButtonTapped(_ sender: Any) {
-//        if isValidate() == false {
-//            return
-//        }
-//        if state == .Create {
-//            ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
-//        } else if state == .Update {
-//            //self.title = todoTitleTextField?.text
-//            ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
-//        }
-//        self.performSegue(withIdentifier: "returnToDoList", sender: self)
-
-    //}
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
@@ -274,10 +234,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
     }
    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-//        textField.resignFirstResponder()
-//       return true
-//    }
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         
     }
@@ -318,23 +275,6 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         
     }
     
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+ 
     
 }

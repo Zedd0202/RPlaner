@@ -55,17 +55,7 @@ class PickToDoViewController: UIViewController {
         }
     }
     
-//    @IBAction func tapAnywhereAction(_ sender: Any) {
-//        if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
-//          self.performSegue(withIdentifier: "showDetailView", sender: self)
-//        }
-//    }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if (segue.identifier == "showDetailView") {
-//            let newToDoVC = segue.destination as! ToDoDetailViewController
-//            newToDoVC.todo = self.todo
-//        }
-//    }
+
    
 
 
@@ -76,18 +66,10 @@ class PickToDoViewController: UIViewController {
         
         registerForLocalNotifications()
 
-       // self.todoTitleTextField?.layer.cornerRadius = 10
-       // self.todoTitleTextField?.layer.masksToBounds = true
+      
 
         pickRandomToDoButton.layer.cornerRadius = 0.5 * pickRandomToDoButton.bounds.size.width
        pickRandomToDoButton.layer.masksToBounds = false
-        //timeLabel.attributedText = UIFont(name: "BMHANNA_11yrs_ttf", size: 35)
-        
-      // pickRandomToDoButton.layer.shadowColor = UIColor.green.cgColor
-      //  pickRandomToDoButton.layer.shadowOpacity = 0.8;
-       // pickRandomToDoButton.layer.shadowRadius = 12;
-        //pickRandomToDoButton.layer.shadowOffset = CGSize(x :12.0, y :12.0);
-        
         
         completionButton.layer.masksToBounds = false
          completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.width
@@ -173,7 +155,7 @@ class PickToDoViewController: UIViewController {
                     var deadLine = Double((todoList.items?[randomIndex!].deadLineNumber)!)
                     print(deadLine)
                     
-                    let time = getCurrentDate() + 30.0
+                    let time = getCurrentDate() + 5.0
                     
                    // let time = getCurrentDate() + (deadLine!*86400)
                     
@@ -182,7 +164,7 @@ class PickToDoViewController: UIViewController {
 //                    self.currentTime = currentTime
                     
                     //maxCount = deadLine!*86400
-                    maxCount = 30.0
+                    maxCount = 5.0
                     userDefaults.set(maxCount, forKey: "maxCount")
                     userDefaults.synchronize()
                     
@@ -325,30 +307,6 @@ class PickToDoViewController: UIViewController {
             
             present(alertController, animated: true, completion: nil)
             
-            
-//            completionButton.isHidden = true
-//            pickRandomToDoButton.isHidden = false
-//            timeLabel.isHidden = true
-//            displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
-//            timeLabel.isHidden = true
-//            userDefaults.set(displayTodoLabel.text, forKey: "다음 계획을 생성하려면 클릭버튼을 눌러주세요")
-//            userDefaults.synchronize()
-            
-           // currentCount = 0
-           // circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
-            
-            
-            
-//            let realm = try! Realm()
-//            realm.beginWrite()
-//            
-//            //todoList.complete()
-//            doingTodo.isComplete = true
-//            
-//            
-//            doingTodo.isDoing = false
-//            try? realm.commitWrite()
-            
         }
     }
     
@@ -413,13 +371,12 @@ class PickToDoViewController: UIViewController {
         UserDefaults.standard.set(stopTime, forKey: stopTimeKey)
         self.stopTime = stopTime
         
-        // start Timer
+        
         
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
         
         guard includeNotification else { return }
         
-        // start local notification (so we're notified if timer expires while app is not running)
         
         if #available(iOS 10, *) {
             let content = UNMutableNotificationContent()
@@ -464,6 +421,10 @@ class PickToDoViewController: UIViewController {
     
     private func notifyTimerCompleted() {
         timeLabel.text = "기한이 만료되었습니다."
+        timers?.invalidate()
+        timers = nil
+        circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+        
     }
     
 }

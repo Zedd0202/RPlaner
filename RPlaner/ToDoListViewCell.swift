@@ -11,11 +11,12 @@ import UIKit
 class ToDoListViewCell: UITableViewCell {
     @IBOutlet weak var todoListTitleLabel: UILabel?
     @IBOutlet weak var todoListSubtitleLabel: UILabel!
-    
+    //리스트뷰에서 계획 타이틀과 메모가 보이게.
     var todo: ToDo? {
         didSet {
             todoListTitleLabel?.text = todo?.planTitle
             todoListSubtitleLabel?.text = todo?.memo
+            //set.
         }
     }
     

@@ -22,7 +22,7 @@ class ToDoListViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
   
-        
+        //realm 변수를 선언.
         let realm = try? Realm()
 
         self.todoList.items = realm?.objects(ToDo.self)
@@ -32,6 +32,7 @@ class ToDoListViewController: UITableViewController {
         self.navigationItem.backBarButtonItem?.tintColor = .white
 
     }
+    //추가 버튼을 눌렀을 때 수행되는 함수. 세그를 이용하여 toNewToDoViewController로 가게된다.
     @IBAction func addButtonTapped(_ sender: Any) {
         self.todo = nil
         self.performSegue(withIdentifier: "toNewToDoViewController", sender: self)
@@ -42,10 +43,12 @@ class ToDoListViewController: UITableViewController {
    
     
     // MARK: - Table view data source
+    //테이블 뷰에 카운트를 줘야하므로 현재 todolist에 있는 아이템 갯수들을 리턴해주게 된다.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoList.items?.count ?? 0
     }
     
+    //테이블뷰 셀을 리턴해주는 함수.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCell", for: indexPath) as? ToDoListViewCell
         cell?.todo = (todoList.items?[indexPath.row])
@@ -53,18 +56,23 @@ class ToDoListViewController: UITableViewController {
         
         
     }
+    //셀의 높이를 지정
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
   
+    //셀을 클릭했을 시 수행되는 함수. 해당 셀을 클릭하면 세그를 통해 디테일 뷰로 넘어가게 된다.
     override func tableView(_ table: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ToDoListViewCell
         self.todo = cell.todo
         self.performSegue(withIdentifier: "toDetailToDoViewController", sender: self)
     }
+    //뷰가 사라질 때 수행되는 함수.
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
+    
+    //performSegue가 수행될 때 자동으로 수행되는 함수.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toDetailToDoViewController") {
             let newToDoVC = segue.destination as! ToDoDetailViewController
@@ -82,7 +90,7 @@ class ToDoListViewController: UITableViewController {
     var deleteTableIndexPath: NSIndexPath? = nil
     
     
-    
+    //스와이프를 하면 현재 데이터를 가지고 toNewToDoViewController로 갈 수 있도록 한다.
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             
@@ -136,11 +144,6 @@ class ToDoListViewController: UITableViewController {
             
         }
     }
-    
-    
-    
-    
-   
     
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {
         tableView.reloadData()

@@ -103,7 +103,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             state = .Update
         } else {
             self.todoTitleTextField?.placeholder = "구체적인 계획을 입력해주세요."
-            self.todoTitleTextField?.attributedPlaceholder = NSAttributedString(string: "구체적인 계획을 입력해주세요.",attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+            self.todoTitleTextField?.attributedPlaceholder = NSAttributedString(string: "구체적인 계획을 입력해주세요.",attributes: [NSForegroundColorAttributeName: UIColor.white])
         
             
             state = .Create

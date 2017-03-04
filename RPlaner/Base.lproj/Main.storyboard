@@ -462,7 +462,7 @@
             <objects>
                 <navigationController id="uUw-3M-LB2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="리스트" image="list-2" id="Otb-UE-B0X"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="KyY-wR-RaX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KyY-wR-RaX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.94901960780000005" green="0.94509803920000002" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -484,7 +484,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dCZ-p0-opi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="내 계획" image="temporal-data-storage" id="jQS-pX-Rck"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wt6-Us-K4q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wt6-Us-K4q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -502,7 +502,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BkJ-f9-F2p" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="otL-j0-yAP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="otL-j0-yAP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

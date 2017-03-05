@@ -90,19 +90,19 @@ class ToDoListViewController: UITableViewController {
     var deleteTableIndexPath: NSIndexPath? = nil
     
     
-    //스와이프를 하면 현재 데이터를 가지고 toNewToDoViewController로 갈 수 있도록 한다.
+    //스와이프를 edit, delete버튼이 나옴.
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             
             print("a")
-            
+            //현재 데이터를 가지고 toNewToDoViewController로 갈 수 있도록 한다.
             if let cell: ToDoListViewCell = tableView.cellForRow(at: editActionsForRowAt) as? ToDoListViewCell {
             self.performSegue(withIdentifier: "toNewToDoViewController", sender: cell.todo)
             }
 
         }
         
-        
+        //삭제. row를 삭제할 뿐만아니라 todoList에서도 삭제해야한다.
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
             
             tableView.beginUpdates()
@@ -119,11 +119,11 @@ class ToDoListViewController: UITableViewController {
         return [delete,edit]
     }
     
-    
+    //정렬.
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1{
             tableView.beginUpdates()
-
+            //ㄱ~ㅎ 순으로 정렬.
             let sortedStuff = realm?.objects(ToDo.self).sorted(byKeyPath: "planTitle", ascending: true)
             
             self.todoList.items = sortedStuff
@@ -136,7 +136,7 @@ class ToDoListViewController: UITableViewController {
             
         } else if sender.selectedSegmentIndex == 0 {
             
-            // 제목대신 날짜로 바꾸기
+            // 최근 생성일 순으로 정렬
             let sortedStuffs = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: false)
             
             self.todoList.items = sortedStuffs

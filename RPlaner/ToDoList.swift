@@ -29,12 +29,12 @@ class ToDoList {
 //                return realm?.objects(ToDo.self)
 //        self.items =
 //    }
-    
+    //삭제기능
     func delete(index: Int) {
         do {
             let realm = try Realm()
            // let countRealm = try? Realm()
-
+            //realm에서 삭제해준다.
             try realm.write {
                 realm.delete((items?[index])!)
               // countRealm?.delete((items?[index])!)
@@ -43,7 +43,7 @@ class ToDoList {
             print("realm delete error")
         }
     }
-    
+    //생성기능.
     func create(name: String, deadline: String, completionOption : String, memoText: String,createdAt : Date) {
         let toDo = ToDo()
         
@@ -63,7 +63,7 @@ class ToDoList {
             print("realm add error")
         }
     }
-    
+    //수정기능.
     func update(todo: ToDo?,name: String, deadline: String, completionOption : String, memoText: String) {
         do {
             let realm = try Realm()

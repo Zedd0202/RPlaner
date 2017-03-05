@@ -29,14 +29,15 @@ class PickToDoViewController: UIViewController {
     var timers : Timer?
     private var stopTime: Date?
     private var timer: Timer?
-
+    
     let userDefaults = UserDefaults.standard
     let realm = try? Realm()
     
-  
+    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var circularProgressView: KDCircularProgress!
-       func handle()
+    
+    func handle()
     {
         if maxCount <= currentCount {
             print("tttttttttt")
@@ -55,28 +56,32 @@ class PickToDoViewController: UIViewController {
         }
     }
     
-
-   
-
-
     
+    
+    
+    
+    //뷰가 처음 로드 되었을 때 수행되는 함수.
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = false
-        
+        //notification을 등록해준다.
         registerForLocalNotifications()
-
-      
-
+        
+        
+        //클릭버튼과 완료버튼을 둥글게 하기 위한 코드
         pickRandomToDoButton.layer.cornerRadius = 0.5 * pickRandomToDoButton.bounds.size.width
-       pickRandomToDoButton.layer.masksToBounds = false
+        pickRandomToDoButton.layer.masksToBounds = false
         
         completionButton.layer.masksToBounds = false
-         completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.width
+        completionButton.layer.cornerRadius = 0.5 * completionButton.bounds.size.width
         completionButton.isHidden = true
+        
+        
         self.todoList.items = realm?.objects(ToDo.self)
         userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
         
+        
+        //만약 뷰가 로드되었을 때, 수행중인 계획이 있다면 표시해준다.
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
             displayTodoLabel.text = doingTodo.planTitle
             completionButton.isHidden = false
@@ -84,8 +89,9 @@ class PickToDoViewController: UIViewController {
             timeLabel.isHidden = false
             
             
-           // registerForLocalNotifications()
+            // registerForLocalNotifications()
             stopTime = UserDefaults.standard.object(forKey: stopTimeKey) as? Date
+            //현재 시간이 완료시간보다 작으면 타이머를 다시 실행하고 아니면 카운트 다운이 끝났다는 알림을 보낸다.
             if let time = stopTime {
                 if time > Date() {
                     startTimer(time, includeNotification: false)
@@ -95,7 +101,7 @@ class PickToDoViewController: UIViewController {
                 }
             }
         }
-            
+        //만약 현재 수행중인 계획이 없다면 카운트를 멈춘다.
         else{
             timers?.invalidate()
             timers = nil
@@ -105,7 +111,7 @@ class PickToDoViewController: UIViewController {
         
     }
     
-    
+    //노티피케이션을 등록해주는 함수. iOS 10버전 이상에서만 동작한다.
     private func registerForLocalNotifications() {
         if #available(iOS 10, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -116,6 +122,7 @@ class PickToDoViewController: UIViewController {
                 }
             }
         }
+            //노티피케이션의 형태를 지정해준다.
         else {
             let types: UIUserNotificationType = [.badge, .sound, .alert]
             let settings = UIUserNotificationSettings(types: types, categories: nil)
@@ -127,7 +134,7 @@ class PickToDoViewController: UIViewController {
     @IBOutlet weak var pickRandomToDoButton: UIButton!
     @IBOutlet weak var completionButton: UIButton!
     
-    
+    //랜덤한 계획을 뽑는 클릭버튼이다. 현재 생성된 계획이 0 이상일 때만 동작한다.
     @IBAction func tapPickRandomToDoButton(_ sender: Any) {
         timeLabel.isHidden = false
         if (todoList.items?.count)! >  0
@@ -136,6 +143,7 @@ class PickToDoViewController: UIViewController {
             currentCount = 0.0
             while  true{
                 let ccount = realm?.objects(ToDo.self).filter("isComplete == true")
+                //만약 현재 생성된 계획과 완료된 계획의 수가 같으면 처리해줄 코드
                 if ccount?.count == todoList.items?.count{
                     timeLabel.isHidden = true
                     
@@ -144,7 +152,9 @@ class PickToDoViewController: UIViewController {
                     userDefaults.synchronize()
                     break;
                 }
+                //랜덤 인덱스를 뽑아준다.
                 self.randomIndex = Int(arc4random_uniform(UInt32((todoList.items?.count)!)))
+                //현재 뽑힌 계획이 완료가 되지 않았을 경우에만 실행.
                 if((todoList.items?[randomIndex!].isComplete)! == false){
                     timeLabel.isHidden = false
                     displayTodoLabel.isHidden = false
@@ -152,22 +162,25 @@ class PickToDoViewController: UIViewController {
                     pickRandomToDoButton.isHidden = true
                     completionButton.isHidden = false
                     
+                    //그 계획의 데드라인을 가져온다.
                     var deadLine = Double((todoList.items?[randomIndex!].deadLineNumber)!)
                     print(deadLine)
                     
-                    let time = getCurrentDate() + 5.0
+                    //완료시간
+                    //let time = getCurrentDate() + 5.0
+                     //완료시간을 지정해준다.
+                     let time = getCurrentDate() + (deadLine!*86400)
                     
-                   // let time = getCurrentDate() + (deadLine!*86400)
                     
-                    
-//                    UserDefaults.standard.set(currentTime, forKey: "currentTime")
-//                    self.currentTime = currentTime
+                    //                    UserDefaults.standard.set(currentTime, forKey: "currentTime")
+                    //                    self.currentTime = currentTime
                     
                     //maxCount = deadLine!*86400
                     maxCount = 5.0
                     userDefaults.set(maxCount, forKey: "maxCount")
                     userDefaults.synchronize()
                     
+                    //그래프를 계산. 만약 현재 카운트가 가야할 맥스카운트보다 작으면 수행.
                     if currentCount <= maxCount {
                         //currentCount += 1
                         
@@ -175,11 +188,14 @@ class PickToDoViewController: UIViewController {
                         let newAngleValue = newAngle()
                         
                         //timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handle(_:)), userInfo: nil, repeats: true)
+                        
+                        //타이머를 돌려 계속 handle함수가 0.9초마다 수행되게 한다.
                         timers = Timer.scheduledTimer(withTimeInterval: 0.9, repeats: true, block: { (timers) in
                             self.handle()
                             print("A")
                         })
                     }
+                        //현재 카운트가 맥스 카운트를 넘어가면 타이머를 종료한다.
                     else{
                         timers?.invalidate()
                         timers = nil
@@ -200,6 +216,7 @@ class PickToDoViewController: UIViewController {
                     
                     let realm = try! Realm()
                     realm.beginWrite()
+                    //현재 뽑혔으면 현재 수행중이라는 bool형 변수를 true로 set해준다.
                     todoList.items?[randomIndex!].isDoing = true
                     try? realm.commitWrite()
                     userDefaults.setValue(randomIndex, forKey: "randomIndex")
@@ -219,7 +236,7 @@ class PickToDoViewController: UIViewController {
             timeLabel.isHidden = true
         }
     }
-    
+    //그래프를 그려주는 함수. 현재카운트와 맥스카운트를 비교하여 라이브러리에 있는 함수들을 불러와 수행한다.
     func newAngle() -> Int {
         if currentCount >=  maxCount{
             timers?.invalidate()
@@ -235,9 +252,10 @@ class PickToDoViewController: UIViewController {
         
         return Int(360 * (currentCount / maxCount))
         //return Int(currentCount / maxCount)
-
+        
     }
     
+    //현재 시간을 보기좋은 형태로 가지고 오는 함수.
     func getCurrentDate() -> Date {
         
         var now:Date = Date()
@@ -253,16 +271,19 @@ class PickToDoViewController: UIViewController {
         }
         return now
     }
-    
+    //완료버튼을 눌렀을 때 수행되는 함수.
     @IBAction func tapToDoCompleteButton(_ sender: Any) {
         
-//        currentCount = 0
-//        circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
-//        timers?.invalidate()
-//        timers = nil
-//        timeLabel.isHidden = true
+        //        currentCount = 0
+        //        circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
+        //        timers?.invalidate()
+        //        timers = nil
+        //        timeLabel.isHidden = true
+        
+        //현재 수행중인 계획을 완료하는 것이므로 현재 수행중인 계획이 있는지 체크해야한다.
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first{
             
+            //바로 완료하지 않게 하기 위해 alert뷰 추가.
             let alertController = UIAlertController(
                 title: "\(doingTodo.planTitle!)을(를) 정말로 다 끝내셨나요?",
                 message: "끝내셨다면 완료버튼을 눌러주세요.",
@@ -278,6 +299,8 @@ class PickToDoViewController: UIViewController {
             let confirmAction = UIAlertAction(
             title: "완료", style: UIAlertActionStyle.default) { (action) in
                 //self.currentCount = 0
+                
+                //완료 버튼을 눌렀으므로 그래프를 다시 0으로 돌리고, 타이머를 중지시킨다.
                 self.circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
                 self.timers?.invalidate()
                 self.timers = nil
@@ -294,12 +317,13 @@ class PickToDoViewController: UIViewController {
                 realm.beginWrite()
                 
                 //todoList.complete()
+                //현재 계획을 완료했다고 체크
                 doingTodo.isComplete = true
                 
-                
+                //현재 수행중이지 않게 되기때문에 false로 set.
                 doingTodo.isDoing = false
                 try? realm.commitWrite()
-
+                
             }
             
             alertController.addAction(confirmAction)
@@ -309,15 +333,16 @@ class PickToDoViewController: UIViewController {
             
         }
     }
-    
+    //viewDidLoad다음에 수행되는 함수.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         timeLabel.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
-
+        
+        //현재 수행중인계획이 있다면,
         if let doingTodo = todoList.items?.filter({ $0.isDoing == true }).first {
             
-            
+            //게다가 현재 계획이 완료된 상태가 아니라면 수행.
             if doingTodo.isComplete == false{
                 self.displayTodoLabel.text = doingTodo.planTitle
                 pickRandomToDoButton.isHidden = true
@@ -328,7 +353,7 @@ class PickToDoViewController: UIViewController {
                 maxCount = userDefaults.double(forKey: "maxCount")
                 userDefaults.synchronize()
                 
-               
+                //위와 마찬가지로 현재 그래프 카운트와 맥스 카운트를 비교하여 수행.
                 if currentCount >=  maxCount{
                     timers?.invalidate()
                     timers = nil
@@ -348,7 +373,7 @@ class PickToDoViewController: UIViewController {
             
         }
         else{
-            
+            //현재  수행중인 계획이 없다면 수행.
             self.displayTodoLabel.text = "다음 계획을 생성하려면 클릭버튼을 눌러주세요"
             pickRandomToDoButton.isHidden = false
             completionButton.isHidden = true
@@ -364,20 +389,22 @@ class PickToDoViewController: UIViewController {
     
     
     
-    
+    //카운트다운을 수행하는 함수.
     private func startTimer(_ stopTime: Date, includeNotification: Bool = true) {
         // save `stopTime` in case app is terminated
         
+        
+        //유저디폴트를 이용해 현재 시간을 저장한다.
         UserDefaults.standard.set(stopTime, forKey: stopTimeKey)
         self.stopTime = stopTime
         
         
-        
+        //타이머 수행. 0.1초마다 handleTimer를 불러온다.
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
         
         guard includeNotification else { return }
         
-        
+        //iOS 10부터 적용가능. 노티피케이션의 내용을 지정해준다.
         if #available(iOS 10, *) {
             let content = UNMutableNotificationContent()
             content.title = "계획기한이 만료되었어요."
@@ -392,12 +419,13 @@ class PickToDoViewController: UIViewController {
             UIApplication.shared.scheduleLocalNotification(notification)
         }
     }
-    
+    //카운트다운이 끝났을 때 불리는 함수.
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
     
+    //카운트다운 표시 형식을 보기좋게 하기 위해 구현. 
     private let dateComponentsFormatter: DateComponentsFormatter = {
         let _formatter = DateComponentsFormatter()
         _formatter.allowedUnits = [.day, .hour, .minute, .second]

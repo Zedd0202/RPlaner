@@ -111,7 +111,7 @@ class PickToDoViewController: UIViewController {
         
     }
     
-    //노티피케이션을 등록해주는 함수. iOS 10버전 이상에서만 동작한다.
+    //MARK: Register Notification.
     private func registerForLocalNotifications() {
         if #available(iOS 10, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -129,6 +129,8 @@ class PickToDoViewController: UIViewController {
             UIApplication.shared.registerUserNotificationSettings(settings)
         }
     }
+    
+    
     
     @IBOutlet weak var displayTodoLabel: UILabel!
     @IBOutlet weak var pickRandomToDoButton: UIButton!
@@ -152,8 +154,11 @@ class PickToDoViewController: UIViewController {
                     userDefaults.synchronize()
                     break;
                 }
-                //랜덤 인덱스를 뽑아준다.
+                
+                //MARK: Create RandomIndex
                 self.randomIndex = Int(arc4random_uniform(UInt32((todoList.items?.count)!)))
+                
+                
                 //현재 뽑힌 계획이 완료가 되지 않았을 경우에만 실행.
                 if((todoList.items?[randomIndex!].isComplete)! == false){
                     timeLabel.isHidden = false
@@ -389,22 +394,19 @@ class PickToDoViewController: UIViewController {
     
     
     
-    //카운트다운을 수행하는 함수.
+    //MARK: Start Timer
     private func startTimer(_ stopTime: Date, includeNotification: Bool = true) {
-        // save `stopTime` in case app is terminated
-        
         
         //유저디폴트를 이용해 현재 시간을 저장한다.
         UserDefaults.standard.set(stopTime, forKey: stopTimeKey)
         self.stopTime = stopTime
-        
         
         //타이머 수행. 0.1초마다 handleTimer를 불러온다.
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleTimer(_:)), userInfo: nil, repeats: true)
         
         guard includeNotification else { return }
         
-        //iOS 10부터 적용가능. 노티피케이션의 내용을 지정해준다.
+        //iOS 10이상인지 아닌지 판별. Notification의 내용을 지정
         if #available(iOS 10, *) {
             let content = UNMutableNotificationContent()
             content.title = "계획기한이 만료되었어요."

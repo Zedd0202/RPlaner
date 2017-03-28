@@ -10,7 +10,6 @@
 		141A26DB1E5D6D630081BDD4 /* BMHANNA_11yrs_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */; };
 		141A26DD1E5D6FD90081BDD4 /* BMHANNA_11yrs_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */; };
 		141A26DF1E5D994C0081BDD4 /* TmonMonsori.otf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */; };
-		1427481E1E556F7800C192B8 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1427481D1E556F7800C192B8 /* Timer.swift */; };
 		143A40AA1E4DFD160026A70D /* PickToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A40A91E4DFD160026A70D /* PickToDoViewController.swift */; };
 		144CD1021E4DC57E00479D13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144CD1011E4DC57E00479D13 /* AppDelegate.swift */; };
 		144CD1071E4DC57E00479D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144CD1051E4DC57E00479D13 /* Main.storyboard */; };
@@ -30,7 +29,6 @@
 		141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMHANNA_11yrs_otf.otf; sourceTree = "<group>"; };
 		141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMHANNA_11yrs_ttf.ttf; sourceTree = "<group>"; };
 		141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TmonMonsori.otf.ttf; sourceTree = "<group>"; };
-		1427481D1E556F7800C192B8 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		143A40A91E4DFD160026A70D /* PickToDoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickToDoViewController.swift; path = RPlaner/PickToDoViewController.swift; sourceTree = "<group>"; };
 		144CD0FE1E4DC57E00479D13 /* RPlaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RPlaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		144CD1011E4DC57E00479D13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				140D22111E613A0A00BEFD39 /* Font */,
-				1427481D1E556F7800C192B8 /* Timer.swift */,
 				1466DB351E54196B0036652A /* KDCircularProgress.swift */,
 				144967EA1E52F4BF00F9542C /* View */,
 				144967ED1E52F4ED00F9542C /* Cell */,
@@ -291,7 +288,6 @@
 				14CA75841E4DC61E008D96D7 /* ToDo.swift in Sources */,
 				14C606BB1E4DE97F00FEB1CB /* NewToDoCreateViewController.swift in Sources */,
 				145CACFF1E5197F000B4014A /* ToDoDetailViewController.swift in Sources */,
-				1427481E1E556F7800C192B8 /* Timer.swift in Sources */,
 				143A40AA1E4DFD160026A70D /* PickToDoViewController.swift in Sources */,
 				144CD1021E4DC57E00479D13 /* AppDelegate.swift in Sources */,
 				14C606BF1E4DF22000FEB1CB /* ToDoListViewCell.swift in Sources */,

@@ -37,9 +37,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
     @IBOutlet weak var todoDaysTextField: UITextField?
     @IBOutlet weak var todoTitleTextField: UITextField?
     
-    @IBOutlet weak var timerPickerField: UITextField!
     
-    @IBOutlet weak var TimerTodoTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +81,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         //텍스트필드에 inputView를 이용하여 눌렀을 때 PickerView가 나오게 한다.
         todoDaysTextField?.inputView = deadLineNumberPicker
         todoCompleteOptionTextField?.inputView = deadLineNumberPicker
-        timerPickerField.inputView = TimerOptionPicker
+        //timerPickerField.inputView = TimerOptionPicker
     
         
         //PickerView의 위치, 너비, 그리고 높이를 지정.

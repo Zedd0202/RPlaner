@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1412A0131F015D1F009038BE /* HoonWhitecatR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1412A0121F015D1F009038BE /* HoonWhitecatR.ttf */; };
+		1412A0151F015D80009038BE /* HoonNamugneulM.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1412A0141F015D80009038BE /* HoonNamugneulM.otf */; };
 		141A26DB1E5D6D630081BDD4 /* BMHANNA_11yrs_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */; };
 		141A26DD1E5D6FD90081BDD4 /* BMHANNA_11yrs_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */; };
 		141A26DF1E5D994C0081BDD4 /* TmonMonsori.otf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1412A0121F015D1F009038BE /* HoonWhitecatR.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HoonWhitecatR.ttf; sourceTree = "<group>"; };
+		1412A0141F015D80009038BE /* HoonNamugneulM.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HoonNamugneulM.otf; sourceTree = "<group>"; };
 		141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMHANNA_11yrs_otf.otf; sourceTree = "<group>"; };
 		141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMHANNA_11yrs_ttf.ttf; sourceTree = "<group>"; };
 		141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TmonMonsori.otf.ttf; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 				141A26DE1E5D98EC0081BDD4 /* TmonMonsori.otf.ttf */,
 				141A26DA1E5D6D350081BDD4 /* BMHANNA_11yrs_otf.otf */,
 				141A26DC1E5D6FCF0081BDD4 /* BMHANNA_11yrs_ttf.ttf */,
+				1412A0141F015D80009038BE /* HoonNamugneulM.otf */,
+				1412A0121F015D1F009038BE /* HoonWhitecatR.ttf */,
 			);
 			name = Font;
 			sourceTree = "<group>";
@@ -221,11 +227,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1412A0131F015D1F009038BE /* HoonWhitecatR.ttf in Resources */,
 				141A26DF1E5D994C0081BDD4 /* TmonMonsori.otf.ttf in Resources */,
 				141A26DD1E5D6FD90081BDD4 /* BMHANNA_11yrs_ttf.ttf in Resources */,
 				141A26DB1E5D6D630081BDD4 /* BMHANNA_11yrs_otf.otf in Resources */,
 				144CD10C1E4DC57E00479D13 /* LaunchScreen.storyboard in Resources */,
 				144CD1091E4DC57E00479D13 /* Assets.xcassets in Resources */,
+				1412A0151F015D80009038BE /* HoonNamugneulM.otf in Resources */,
 				144CD1071E4DC57E00479D13 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

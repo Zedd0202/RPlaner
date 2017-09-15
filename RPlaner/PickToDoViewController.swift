@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GameplayKit
+//import GameplayKit
 //랜덤인덱스를 구하기 위해 import
 import RealmSwift
 //Realm을 사용하기 위해 import

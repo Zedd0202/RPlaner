@@ -10,18 +10,20 @@ import UIKit
 import RealmSwift
 
 
+
 class ToDoListViewController: UITableViewController {
     
-    
+    let searchController = UISearchController(searchResultsController: nil)
     let realm = try? Realm()
     var todoList = ToDoList()
     var todo: ToDo?
+    var filteredCandies = ToDoList()
 
     override func viewDidLoad() {
         
+        
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-  
         //realm 변수를 선언.
         let realm = try? Realm()
 
@@ -45,6 +47,7 @@ class ToDoListViewController: UITableViewController {
     // MARK: - Table view data source
     //테이블 뷰에 카운트를 줘야하므로 현재 todolist에 있는 아이템 갯수들을 리턴해주게 된다.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return todoList.items?.count ?? 0
     }
     
@@ -148,5 +151,5 @@ class ToDoListViewController: UITableViewController {
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {
         tableView.reloadData()
     }
-    
+  
 }

@@ -21,16 +21,12 @@ class ToDoListViewController: UITableViewController {
 
     override func viewDidLoad() {
         
-        
         super.viewDidLoad()
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         //realm 변수를 선언.
         let realm = try? Realm()
-
         self.todoList.items = realm?.objects(ToDo.self)
-        
         self.title = "RPlaner"
-        
         self.navigationItem.backBarButtonItem?.tintColor = .white
 
     }
@@ -83,11 +79,9 @@ class ToDoListViewController: UITableViewController {
         }
         if (segue.identifier == "toNewToDoViewController") {
             if let navi = segue.destination as? UINavigationController, let newToDoVC = navi.viewControllers.first as? NewToDoCreateViewController, let todo = sender as? ToDo {
-            
                 newToDoVC.todo = todo
             }
         }
-        
     }
     
     var deleteTableIndexPath: NSIndexPath? = nil
@@ -133,23 +127,17 @@ class ToDoListViewController: UITableViewController {
             
             tableView.reloadData()
             tableView.endUpdates()
-
             
-            
-            
-        } else if sender.selectedSegmentIndex == 0 {
+      } else if sender.selectedSegmentIndex == 0 {
             
             // 최근 생성일 순으로 정렬
             let sortedStuffs = realm?.objects(ToDo.self).sorted(byKeyPath: "createdAt", ascending: false)
-            
+            //self.todoList.items = a?.elements
             self.todoList.items = sortedStuffs
             self.tableView.reloadData()
-            
         }
     }
-    
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {
         tableView.reloadData()
     }
-  
 }

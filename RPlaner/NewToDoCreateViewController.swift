@@ -122,6 +122,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         todoTitleTextField?.leftView = paddingView
         todoTitleTextField?.leftViewMode = UITextFieldViewMode.always
         
+      //todoTitleTextField?.placeholder = "예를들어"
         
         
         //todo가 nil이 아니면 텍스트필드와 데드라인과 메모를 사용자가 입력한 것으로 set. 또한 state를 "수정"모드로 바꿔 나중에 이 계획을 수정할 때 네비게이션 타이틀이 "수정"으로 된다.
@@ -134,10 +135,9 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             //사용자가 입력을 하지 않은 상태면 placeholder를 지정해준다.
         } else {
             self.todoTitleTextField?.placeholder = "구체적인 계획을 입력해주세요."
-            self.todoTitleTextField?.attributedPlaceholder = NSAttributedString(string: "구체적인 계획을 입력해주세요.",attributes: [NSForegroundColorAttributeName: UIColor.white])
-        
-            
+            //self.todoTitleTextField?.attributedPlaceholder = NSAttributedString(string: "구체적인 계획을 입력해주세요. ex) 영어단어 외우기",attributes: [NSForegroundColorAttributeName: UIColor.gray])
             state = .Create
+            print("new")
         }
         //현재 네비게이션 타이틀의 상태를 state의 원시값으로 입력해준다.
         self.navigationItem.title = state.rawValue

@@ -17,7 +17,6 @@ private let stopTimeKey = "stopTimeKey"
 
 class PickToDoViewController: UIViewController {
     
-    
     var currentTime = NSDate()
     var todoList = ToDoList()
     var todo: ToDo?
@@ -29,7 +28,6 @@ class PickToDoViewController: UIViewController {
     var timers : Timer?
     private var stopTime: Date?
     private var timer: Timer?
-    
     let userDefaults = UserDefaults.standard
     let realm = try? Realm()
     
@@ -108,16 +106,15 @@ class PickToDoViewController: UIViewController {
             userDefaults.set(displayTodoLabel.text, forKey: "displayTodoLabel")
             displayTodoLabel.text = displayTodoLabel.text
         }
-        
     }
-    
     //MARK: Register Notification.
+    
     private func registerForLocalNotifications() {
         if #available(iOS 10, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
                 guard granted && error == nil else {
                     // display error
-                    print("\(error)")
+
                     return
                 }
             }
@@ -169,7 +166,7 @@ class PickToDoViewController: UIViewController {
                     
                     //그 계획의 데드라인을 가져온다.
                     var deadLine = Double((todoList.items?[randomIndex!].deadLineNumber)!)
-                    print(deadLine)
+                    //print(deadLine)
                     
                     //완료시간
                     //let time = getCurrentDate() + 5.0
@@ -181,7 +178,8 @@ class PickToDoViewController: UIViewController {
                     //                    self.currentTime = currentTime
                     
                     //maxCount = deadLine!*86400
-                    maxCount = 5.0
+                    //maxCount = deadLine!*86400
+                    maxCount = 60
                     userDefaults.set(maxCount, forKey: "maxCount")
                     userDefaults.synchronize()
                     
@@ -190,13 +188,14 @@ class PickToDoViewController: UIViewController {
                         //currentCount += 1
                         
                         userDefaults.synchronize()
-                        let newAngleValue = newAngle()
+                        //let newAngleValue = newAngle()
                         
                         //timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handle(_:)), userInfo: nil, repeats: true)
                         
                         //타이머를 돌려 계속 handle함수가 0.9초마다 수행되게 한다.
-                        timers = Timer.scheduledTimer(withTimeInterval: 0.9, repeats: true, block: { (timers) in
+                        timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timers) in
                             self.handle()
+                            //let newAngleValue = self.newAngle()
                             print("A")
                         })
                     }
@@ -330,9 +329,9 @@ class PickToDoViewController: UIViewController {
                 try? realm.commitWrite()
                 
             }
-            
-            alertController.addAction(confirmAction)
             alertController.addAction(cancelAction)
+            alertController.addAction(confirmAction)
+            
             
             present(alertController, animated: true, completion: nil)
             

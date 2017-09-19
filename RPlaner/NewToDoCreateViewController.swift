@@ -8,7 +8,36 @@
 
 import UIKit
 
+//private var __maxLengths = [UITextField: Int]()
+//extension UITextField {
+//    @IBInspectable var maxLength: Int {
+//        get {
+//            guard let l = __maxLengths[self] else {
+//                return 150 // (global default-limit. or just, Int.max)
+//            }
+//            return l
+//        }
+//        set {
+//            __maxLengths[self] = newValue
+//            addTarget(self, action: #selector(fix), for: .editingChanged)
+//        }
+//    }
+//    func fix(textField: UITextField) {
+//        let t = textField.text
+//        textField.text = t?.safelyLimitedTo(length: maxLength)
+//    }
+//}
+//
+//extension String
+//{
+//    func safelyLimitedTo(length n: Int)->String {
+//        let c = self.characters
+//        if (c.count <= n) { return self }
+//        return String( Array(c).prefix(upTo: n) )
+//    }
+//}
 class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate {
+    let limitLength = 30
     struct Component {
         
         enum Section: Int {
@@ -161,6 +190,11 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
             return false
         }
         return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = todoTitleTextField?.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= limitLength
     }
     
     //위의 PickerView에서 done버튼을 눌렀을 때 실행되는 함수. PickerView가 사라지게 된다.

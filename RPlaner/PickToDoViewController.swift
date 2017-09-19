@@ -33,13 +33,13 @@ class PickToDoViewController: UIViewController {
     
     
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var circularProgressView: KDCircularProgress!
+    //@IBOutlet weak var circularProgressView: KDCircularProgress!
     
     func handle()
     {
         if maxCount <= currentCount {
             print("tttttttttt")
-            circularProgressView.animate(toAngle: 0.0, duration: 1, completion: nil)
+            //circularProgressView.animate(toAngle: 0.0, duration: 1, completion: nil)
             timers?.invalidate()
             timers = nil
             completionButton.isHidden = true
@@ -50,7 +50,7 @@ class PickToDoViewController: UIViewController {
         }
         else{
             let newAngleValue = newAngle()
-            circularProgressView.animate(toAngle:Double(newAngleValue), duration: 1, completion: nil)
+            //circularProgressView.animate(toAngle:Double(newAngleValue), duration: 1, completion: nil)
         }
     }
     
@@ -176,10 +176,10 @@ class PickToDoViewController: UIViewController {
                     
                     //                    UserDefaults.standard.set(currentTime, forKey: "currentTime")
                     //                    self.currentTime = currentTime
-                    
+                    //let newAngleValue = newAngle()
                     //maxCount = deadLine!*86400
-                    //maxCount = deadLine!*86400
-                    maxCount = 60
+                    maxCount = deadLine!*86400
+                   // maxCount = 60
                     userDefaults.set(maxCount, forKey: "maxCount")
                     userDefaults.synchronize()
                     
@@ -246,8 +246,8 @@ class PickToDoViewController: UIViewController {
             timers?.invalidate()
             timers = nil
             currentCount = 0
-            circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
-            circularProgressView.animate(fromAngle:circularProgressView.angle, toAngle: 0, duration: 0.5, completion: nil)
+            //circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+            //circularProgressView.animate(fromAngle:circularProgressView.angle, toAngle: 0, duration: 0.5, completion: nil)
         }
         
         currentCount += 1
@@ -305,7 +305,7 @@ class PickToDoViewController: UIViewController {
                 //self.currentCount = 0
                 
                 //완료 버튼을 눌렀으므로 그래프를 다시 0으로 돌리고, 타이머를 중지시킨다.
-                self.circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
+                //self.circularProgressView.animate( toAngle: 0, duration: 1, completion: nil)
                 self.timers?.invalidate()
                 self.timers = nil
                 self.timeLabel.isHidden = true
@@ -362,7 +362,7 @@ class PickToDoViewController: UIViewController {
                     timers?.invalidate()
                     timers = nil
                     currentCount = 0
-                    circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+                    //circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
                 }
                 else{
                     timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timers) in
@@ -384,7 +384,7 @@ class PickToDoViewController: UIViewController {
             timers?.invalidate()
             timers = nil
             currentCount = 0
-            circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+            //circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
             
             
         }
@@ -452,7 +452,7 @@ class PickToDoViewController: UIViewController {
         timeLabel.text = "기한이 만료되었습니다."
         timers?.invalidate()
         timers = nil
-        circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
+        //circularProgressView.animate(toAngle: 0, duration: 1, completion: nil)
         
     }
     

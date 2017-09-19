@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,8 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random Planer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CiL-mM-UXT">
-                                <rect key="frame" x="17.5" y="155.5" width="341.5" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random Planer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CiL-mM-UXT">
+                                <rect key="frame" x="17" y="162" width="341.5" height="48"/>
                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="38"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -30,8 +31,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.3741125067083334" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="CiL-mM-UXT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="B40-pa-Bif"/>
-                            <constraint firstItem="CiL-mM-UXT" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-154" id="VPd-aS-2er"/>
+                            <constraint firstItem="CiL-mM-UXT" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="1" id="FXY-Ow-mn7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CiL-mM-UXT" secondAttribute="trailing" constant="0.5" id="LG5-hn-gKv"/>
+                            <constraint firstItem="CiL-mM-UXT" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-147.5" id="oJm-48-adQ"/>
+                            <constraint firstItem="CiL-mM-UXT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="w3a-pg-ss9"/>
                         </constraints>
                     </view>
                 </viewController>

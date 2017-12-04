@@ -43,7 +43,6 @@ class ToDoListViewController: UITableViewController {
     // MARK: - Table view data source
     //테이블 뷰에 카운트를 줘야하므로 현재 todolist에 있는 아이템 갯수들을 리턴해주게 된다.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return todoList.items?.count ?? 0
     }
     

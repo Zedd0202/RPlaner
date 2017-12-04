@@ -34,7 +34,6 @@ class ToDoList {
         do {
             let realm = try Realm()
            
-            
             try realm.write {
                 realm.delete((items?[index])!)
               
@@ -73,7 +72,6 @@ class ToDoList {
                 todo?.deadLineNumber = deadline
                 todo?.TimeOfCompletion = completionOption
                 todo?.memo = memoText
-               
             }
         } catch {
             print("update error")

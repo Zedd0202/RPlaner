@@ -186,7 +186,7 @@ class NewToDoCreateViewController: UIViewController {
     //저장버튼을 눌렀을 때 실행되는 함수.
     @IBAction func saveButtonTapped(_ sender: Any) {
         //생성한 시간을 알아야 하기 때문에 저장한 시간을 저장해준다.
-        var currentTime = Date()
+        let currentTime = Date()
         
         //텍스트필드가 비어있지 않은지 검사한다. 만약 비어있다면 저장버튼을 눌러도 저장이 되지 않음.
         if isValidate() == false {
@@ -229,10 +229,6 @@ class NewToDoCreateViewController: UIViewController {
         
     }
    
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        
-    }
     //키보드가 화면에 나타날 때 수행되는 함수.
     func keyboardWillShow(_ notification:Notification) {
         

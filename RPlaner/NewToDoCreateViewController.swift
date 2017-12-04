@@ -8,35 +8,8 @@
 
 import UIKit
 
-//private var __maxLengths = [UITextField: Int]()
-//extension UITextField {
-//    @IBInspectable var maxLength: Int {
-//        get {
-//            guard let l = __maxLengths[self] else {
-//                return 150 // (global default-limit. or just, Int.max)
-//            }
-//            return l
-//        }
-//        set {
-//            __maxLengths[self] = newValue
-//            addTarget(self, action: #selector(fix), for: .editingChanged)
-//        }
-//    }
-//    func fix(textField: UITextField) {
-//        let t = textField.text
-//        textField.text = t?.safelyLimitedTo(length: maxLength)
-//    }
-//}
-//
-//extension String
-//{
-//    func safelyLimitedTo(length n: Int)->String {
-//        let c = self.characters
-//        if (c.count <= n) { return self }
-//        return String( Array(c).prefix(upTo: n) )
-//    }
-//}
-class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate {
+
+class NewToDoCreateViewController: UIViewController {
     let limitLength = 30
     struct Component {
         
@@ -191,11 +164,7 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         }
         return true
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = todoTitleTextField?.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
-        return newLength <= limitLength
-    }
+    
     
     //위의 PickerView에서 done버튼을 눌렀을 때 실행되는 함수. PickerView가 사라지게 된다.
     func donePicker() {
@@ -235,50 +204,6 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
         self.performSegue(withIdentifier: "returnToDoList", sender: self)
     }
     
-    //PickerView의 섹션을 2로 준다. 기한 선택, 완료옵션
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    //PickerView설정 위에서 선언했던 열거형들의 카운트를 리턴한다.
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case Component.Section.days.rawValue:
-            return Component.pickOption.count
-        case Component.Section.completeOption.rawValue:
-            return Component.completeOption.count
-        default:
-            return 0
-        }
-        
-    }
-    //PickerView의 row설정.
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case Component.Section.days.rawValue:
-            return Component.pickOption[row]
-        case Component.Section.completeOption.rawValue:
-            return Component.completeOption[row]
-            
-        default :
-            return nil
-        }
-    }
-    
-    //PickerView의 didSelectRow. 만약 그 row를 선택했을 시 그 선택한 row를 텍스트필드에 넣어준다.
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        switch component {
-        case Component.Section.days.rawValue:
-            self.todoDaysTextField?.text = Component.pickOption[row]
-        case Component.Section.completeOption.rawValue:
-            self.todoCompleteOptionTextField?.text = Component.completeOption[row]
-            
-            
-        default :
-            return
-        }
-        
-    }
     
     
    //ViewDidLoad다음에 수행되는 함수. 키보드 노티피케이션을 구독해주어야 한다.
@@ -349,3 +274,64 @@ class NewToDoCreateViewController: UIViewController,UITextFieldDelegate,UITextVi
  
     
 }
+
+extension NewToDoCreateViewController : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = todoTitleTextField?.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= limitLength
+    }
+}
+extension NewToDoCreateViewController : UITextViewDelegate{
+    
+}
+extension NewToDoCreateViewController : UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate{
+    
+    //PickerView의 섹션을 2로 준다. 기한 선택, 완료옵션
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    //PickerView설정 위에서 선언했던 열거형들의 카운트를 리턴한다.
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case Component.Section.days.rawValue:
+            return Component.pickOption.count
+        case Component.Section.completeOption.rawValue:
+            return Component.completeOption.count
+        default:
+            return 0
+        }
+        
+    }
+    //PickerView의 row설정.
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case Component.Section.days.rawValue:
+            return Component.pickOption[row]
+        case Component.Section.completeOption.rawValue:
+            return Component.completeOption[row]
+            
+        default :
+            return nil
+        }
+    }
+    
+    //PickerView의 didSelectRow. 만약 그 row를 선택했을 시 그 선택한 row를 텍스트필드에 넣어준다.
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        switch component {
+        case Component.Section.days.rawValue:
+            self.todoDaysTextField?.text = Component.pickOption[row]
+        case Component.Section.completeOption.rawValue:
+            self.todoCompleteOptionTextField?.text = Component.completeOption[row]
+            
+            
+        default :
+            return
+        }
+        
+    }
+    
+}
+
+

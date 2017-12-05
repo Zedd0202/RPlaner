@@ -45,23 +45,27 @@ class ToDoList {
     
     //MARK: Create newToDo
     func create(name: String, deadline: String, completionOption : String, memoText: String,createdAt : Date) {
-        let toDo = ToDo()
         
-        toDo.planTitle = name
-        toDo.deadLineNumber = deadline
-        toDo.TimeOfCompletion = completionOption
-        toDo.memo = memoText
-        toDo.isComplete = false
-        toDo.createdAt = Date()
-        
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(toDo)
+        DispatchQueue.global().sync {
+            let toDo = ToDo()
+            
+            toDo.planTitle = name
+            toDo.deadLineNumber = deadline
+            toDo.TimeOfCompletion = completionOption
+            toDo.memo = memoText
+            toDo.isComplete = false
+            toDo.createdAt = Date()
+            
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    realm.add(toDo)
+                }
+            } catch {
+                print("realm add error")
             }
-        } catch {
-            print("realm add error")
         }
+        
     }
     //MARK: Update ToDo
     func update(todo: ToDo?,name: String, deadline: String, completionOption : String, memoText: String) {

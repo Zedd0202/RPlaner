@@ -182,9 +182,7 @@ class NewToDoCreateViewController: UIViewController {
         dismiss(animated: true, completion: nil)
 
     }
-    
-    //저장버튼을 눌렀을 때 실행되는 함수.
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    func savefunction(completion:(Bool)->()){
         //생성한 시간을 알아야 하기 때문에 저장한 시간을 저장해준다.
         let currentTime = Date()
         
@@ -193,6 +191,7 @@ class NewToDoCreateViewController: UIViewController {
             return
         }
         //state가 "생성"모드라면 실행되는 코드. ToDoList()의 배열에 Create함수를 불러온다.
+        
         if state == .Create {
             ToDoList().create(name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!, createdAt : currentTime)
             //"수정"모드라면 ToDoList()의 update함수를 불러온다.
@@ -200,8 +199,20 @@ class NewToDoCreateViewController: UIViewController {
             //self.title = todoTitleTextField?.text
             ToDoList().update(todo: todo, name: (todoTitleTextField?.text!)!, deadline: (todoDaysTextField?.text!)!, completionOption : (todoCompleteOptionTextField?.text!)!, memoText: (todoMemo?.text)!)
         }
+        completion(true)
+        
+    }
+    //저장버튼을 눌렀을 때 실행되는 함수.
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        savefunction { (success) in
+            if success{
+                dismiss(animated: true, completion: nil)
+                //self.performSegue(withIdentifier: "returnToDoList", sender: self)
+            }
+        }
         //저장이 되면 내 계획 리스트들로 이동하게 된다. -> rewind세그 이용.
-        self.performSegue(withIdentifier: "returnToDoList", sender: self)
+        //
+       
     }
     
     

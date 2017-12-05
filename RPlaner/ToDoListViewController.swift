@@ -69,6 +69,10 @@ class ToDoListViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
     
     //performSegue가 수행될 때 자동으로 수행되는 함수.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -38,7 +38,6 @@ class PickToDoViewController: UIViewController {
     func handle()
     {
         if maxCount <= currentCount {
-            print("tttttttttt")
             //circularProgressView.animate(toAngle: 0.0, duration: 1, completion: nil)
             timers?.invalidate()
             timers = nil
@@ -196,7 +195,6 @@ class PickToDoViewController: UIViewController {
                         timers = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timers) in
                             self.handle()
                             //let newAngleValue = self.newAngle()
-                            print("A")
                         })
                     }
                         //현재 카운트가 맥스 카운트를 넘어가면 타이머를 종료한다.
@@ -210,7 +208,6 @@ class PickToDoViewController: UIViewController {
                     
                     //let time = getCurrentDate() + 5.0
                     
-                    print(time)
                     if time > Date() {
                         startTimer(time)
                     } else {

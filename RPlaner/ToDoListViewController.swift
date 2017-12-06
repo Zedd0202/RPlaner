@@ -9,8 +9,6 @@
 import UIKit
 import RealmSwift
 
-
-
 class ToDoListViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -94,7 +92,6 @@ class ToDoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             
-            print("a")
             //현재 데이터를 가지고 toNewToDoViewController로 갈 수 있도록 한다.
             if let cell: ToDoListViewCell = tableView.cellForRow(at: editActionsForRowAt) as? ToDoListViewCell {
             self.performSegue(withIdentifier: "toNewToDoViewController", sender: cell.todo)
@@ -112,8 +109,7 @@ class ToDoListViewController: UITableViewController {
             tableView.deleteRows(at: [indexPaths as IndexPath], with: .automatic)
             
             tableView.endUpdates()
-            print(self.todoList.items?.count)
-                        tableView.reloadData()
+            tableView.reloadData()
         }
         
         return [delete,edit]
@@ -152,7 +148,6 @@ class ToDoListViewController: UITableViewController {
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
-        print("Aaaa")
         UIView.animate(withDuration: 5.0, animations: {
             toastLabel.alpha = 0.0
         }, completion: {

@@ -206,8 +206,8 @@ class NewToDoCreateViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         savefunction { (success) in
             if success{
-                dismiss(animated: true, completion: nil)
-                //self.performSegue(withIdentifier: "returnToDoList", sender: self)
+                self.performSegue(withIdentifier: "returnToDoList", sender: self)
+                //
             }
         }
         //저장이 되면 내 계획 리스트들로 이동하게 된다. -> rewind세그 이용.

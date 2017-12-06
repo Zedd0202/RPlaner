@@ -142,5 +142,24 @@ class ToDoListViewController: UITableViewController {
     }
     @IBAction func returnToDoList(segue: UIStoryboardSegue) {
         tableView.reloadData()
+        let toastLabel = UILabel(frame: CGRect(x: view.frame.size.width/2 - 100, y: view.frame.size.height-100, width: self.view.frame.size.width,  height : 35))
+        toastLabel.backgroundColor = UIColor.clear
+        toastLabel.textColor = UIColor.black
+        toastLabel.textAlignment = NSTextAlignment.center;
+        view.addSubview(toastLabel)
+        toastLabel.text = "등록되었습니다"
+        toastLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        print("Aaaa")
+        UIView.animate(withDuration: 5.0, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {
+            (isBool) -> Void in
+            print("done")
+            self.dismiss(animated: true, completion: nil)
+        })
+        
     }
 }
